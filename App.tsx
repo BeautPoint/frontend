@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {Text, SafeAreaView} from 'react-native';
+import SingIn from '@/components/auth/index';
 export type LoggedInParamList = {
   Orders: undefined;
   Settings: undefined;
@@ -18,6 +19,7 @@ function App() {
     <NavigationContainer>
       <SafeAreaView>
         <Text>hello world!</Text>
+        <SingIn />
       </SafeAreaView>
     </NavigationContainer>
   );
