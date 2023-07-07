@@ -1,4 +1,5 @@
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {login, getProfile, logout} from '@react-native-seoul/kakao-login';
 import {useState, useEffect} from 'react';
 import {Alert} from 'react-native';
 
@@ -24,4 +25,19 @@ export const useGoogleOauth = () => {
   }, []);
 
   return {onPressGoogleBtn, userInfo};
+};
+
+export const useKakaoOauth = () => {
+  const [userInfo, setUserInfo] = useState<{}>({});
+  const onPressKakaoBtn = async () => {
+    try {
+      await login();
+      const {email, nickname, profileImageUrl} = await getProfile();
+      setUserInfo({email, nickname, profileImageUrl});
+    } catch (err: any) {
+      Alert.alert('로그인에 실패 하였습니다.');
+    }
+  };
+
+  return {onPressKakaoBtn, userInfo};
 };
