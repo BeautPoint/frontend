@@ -9,7 +9,10 @@ function MapComponent() {
     longitudeDelta: 0.0421,
   };
   return (
-    <View style={{flex: 1}}>
+    <View
+      style={{
+        flex: 1,
+      }}>
       <MapView
         style={{width: '100%', height: '100%'}}
         provider={PROVIDER_GOOGLE}
