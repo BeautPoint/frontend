@@ -1,0 +1,49 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/Cafe24.woff",
+      "sha1": "e59a0cf560b9e9a65de902e3f849fd016c74a74c"
+    },
+    {
+      "path": "src/assets/fonts/Pretendard-Black.otf",
+      "sha1": "84a63829a378bcdc2ba95fea6042f405296d0f7f"
+    },
+    {
+      "path": "src/assets/fonts/Pretendard-Bold.otf",
+      "sha1": "a3e5c50bf788d19d17ea5c772db36607d9ce7d6f"
+    },
+    {
+      "path": "src/assets/fonts/Pretendard-ExtraBold.otf",
+      "sha1": "1742d5947a9c5e66ad1717264ab723666eede533"
+    },
+    {
+      "path": "src/assets/fonts/Pretendard-ExtraLight.otf",
+      "sha1": "97e22cece23cc495ef015682bab8d8ea868312fc"
+    },
+    {
+      "path": "src/assets/fonts/Pretendard-Light.otf",
+      "sha1": "462ea4265a4e021a2e088e711f9cdac0e59c176d"
+    },
+    {
+      "path": "src/assets/fonts/Pretendard-Medium.otf",
+      "sha1": "430d90d2b7d0ac6facc45fab50464f02cd7a6aae"
+    },
+    {
+      "path": "src/assets/fonts/Pretendard-Regular.otf",
+      "sha1": "96b0c23c7de42500265728fd38744bb7dbdb901a"
+    },
+    {
+      "path": "src/assets/fonts/Pretendard-SemiBold.otf",
+      "sha1": "f6dfca7e11e1564c507a4aeff812be4b3d2e252a"
+    },
+    {
+      "path": "src/assets/fonts/Pretendard-Thin.otf",
+      "sha1": "0042281d6019bcfb7142ead6c0e327e86ce5063f"
+    },
+    {
+      "path": "src/assets/fonts/neurimboGothicRegular.otf",
+      "sha1": "0adc9c117bcbb8f1a3db79b18c76592ef9c17cd1"
+    }
+  ]
+}

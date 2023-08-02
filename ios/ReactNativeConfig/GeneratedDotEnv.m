@@ -1,0 +1,1 @@
+  #define DOT_ENV @{ @"KAKAO_APP_KEY":@"7d2077bf5f360e5d5747faf2d822395b",@"NAVER_KEY":@"gYERyHYkVKWWIAtblnpZ",@"NAVER_SECRET":@"8uBEWMFYCs",@"GOOGLE_CLIENT":@"215180481732-t2jivobkh8c23q7i7b4qh14sc49sksqn.apps.googleusercontent.com",@"APPLE_ID":@"1:215180481732:ios:20c6b59fe8284ee409e591" };
