@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-const HomeLayOut = styled.View`
+const HomeLayOut = styled.SafeAreaView`
   width: 100%;
   height: 100%;
   display: flex;
