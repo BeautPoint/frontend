@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-const CommunityLayOut = styled.View`
+const CommunityLayOut = styled.SafeAreaView`
   width: 100%;
   height: 100%;
   display: flex;
