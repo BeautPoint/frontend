@@ -27,6 +27,7 @@
     "react-native-date-picker": "^4.2.13",
     "react-native-dotenv": "^3.4.9",
     "react-native-flipper": "^0.201.0",
+    "react-native-linear-gradient": "^2.8.1",
     "react-native-maps": "^1.7.1",
     "react-native-safe-area-context": "^4.6.3",
     "react-native-screens": "^3.22.0",
