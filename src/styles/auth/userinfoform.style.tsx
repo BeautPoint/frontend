@@ -26,6 +26,7 @@ const ViewCommonStyle = styled.View`
 
 const UserInfoFormLayOut = styled.View`
   width: 100%;
+  background: #ffffff;
 `;
 
 const DescriptionBox = styled(ViewCommonStyle)``;
@@ -66,7 +67,8 @@ const GenderOption = styled(ButtonCommonStyle)<PropType['genderOption']>`
   width: 48%;
   height: 40px;
   border-radius: 5px;
-  background: ${({isPressed}) => (isPressed ? '#b1b1b1' : 'transparent')};
+  border: ${({isPressed}) => (isPressed ? '2px solid #619bff' : 'none')};
+  background: #f4f5f6;
 `;
 
 export {
