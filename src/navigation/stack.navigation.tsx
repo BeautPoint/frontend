@@ -16,7 +16,11 @@ function StackNavigation() {
         options={{headerShown: false}}
       />
       <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="Signup" component={SignupScreen} />
+      <Stack.Screen
+        name="Signup"
+        component={SignupScreen}
+        options={{headerShown: false}}
+      />
       <Stack.Screen
         name="Search"
         component={SearchView}
