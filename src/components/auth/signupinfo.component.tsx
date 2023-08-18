@@ -9,31 +9,26 @@ import {useRecoilValue} from 'recoil';
 import signupState from '@/recoil/auth/signupInfoForm.recoil';
 
 function SignupInfoForm() {
-  const {datePickerHandle} = useSignupUserInfo();
+  const {datePickerHandle, isActive, getUserGender} = useSignupUserInfo();
   const pickerisOpen = useBoolean();
   const [isOpen, setIsOpen] = useState(false);
   // const isPress = useBoolean();
   const [isPress, setIsPress] = useState(2);
   const defaultBirth = new Date(2001, 1, 1);
-  const [dateInput, setDateInput] = useState([
-    {id: 0, name: '연도', dateValue: ''},
-    {id: 1, name: '월', dateValue: ''},
-    {id: 2, name: '일', dateValue: ''},
-  ]);
 
-  const {userInfoForm} = useRecoilValue(signupState);
+  const userInfoForm = useRecoilValue(signupState);
 
-  const [userGender, setUserGender] = useState([
-    {id: 0, text: '남자'},
-    {id: 1, text: '여자'},
-  ]);
-
-  console.log(dateInput);
+  console.log(userInfoForm.birthInfo);
+  console.log(isActive);
 
   const onPressHandle = () => {
     pickerisOpen.valueHandle();
   };
 
+  const genderButtonHandle = (id: number, name: string) => {
+    getUserGender(name);
+    setIsPress(id);
+  };
   return (
     <S.UserInfoFormLayOut>
       <S.DescriptionBox>
@@ -45,7 +40,7 @@ function SignupInfoForm() {
           <AppText>생년월일</AppText>
         </S.Label>
         <S.DateInputBox>
-          {userInfoForm.map(li => (
+          {userInfoForm.birthInfo.map(li => (
             <S.DateInput key={li.id} onPress={() => onPressHandle()}>
               <AppText color="#646770">{li.dateValue || li.name}</AppText>
               <S.InputIcon>
@@ -55,17 +50,20 @@ function SignupInfoForm() {
           ))}
         </S.DateInputBox>
       </S.ProfileDetail>
-
       <S.GenderOptionBox>
         <S.Label>
           <AppText>성별</AppText>
         </S.Label>
-        {userGender.map((li, index) => (
+        {userInfoForm.genderInfo.map((li, index) => (
           <S.GenderOption
             key={li.id}
-            onPress={() => setIsPress(li.id)}
+            onPress={() => genderButtonHandle(li.id, li.name)}
             isPressed={isPress === li.id}>
-            <AppText>{li.text}</AppText>
+            <AppText
+              color={isPress === li.id ? '#619bff' : '#5A6068'}
+              weight={isPress === li.id ? 'Bold' : ''}>
+              {li.name}
+            </AppText>
           </S.GenderOption>
         ))}
       </S.GenderOptionBox>
