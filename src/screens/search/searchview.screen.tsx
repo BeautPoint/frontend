@@ -1,6 +1,7 @@
 import {AppText} from '@/styles/global.style';
 import * as S from '@/styles/screens/searchview.style';
 import CancelIcon from '@/assets/icons/cancelIcon.svg';
+import SearchIcon from '@/assets/icons/searchIcon.svg';
 import BackIcon from '@/assets/icons/backIcon.svg';
 import {NavigationProps} from '@/types/stackprops';
 
@@ -12,6 +13,9 @@ function SearchView({navigation}: NavigationProps['search']) {
           <BackIcon />
         </S.BackButton>
         <S.SearchInput placeholder="시술 부위나 병원 명을 검색하세요" />
+        <S.SearchIconBox>
+          <SearchIcon color={'#337EFF'} />
+        </S.SearchIconBox>
       </S.SearchInputBox>
       <S.SearchHistoryBox>
         <S.HistoryHeader>
