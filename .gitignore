@@ -73,6 +73,9 @@ google-service.json
 *.keystore
 keystore.properties
 androidkey
+fonts
+*.woff
+*.otf
 
 #react-native-config
 ios/tmp.xcconfig
