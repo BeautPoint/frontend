@@ -12,10 +12,9 @@ import MyLocationIcon from '@/assets/icons/gpsIcon.svg';
 
 const {height} = Dimensions.get('screen');
 
-function LocationScreen({navigation}: NavigationProps['search']) {
+function LocationScreen({navigation}: NavigationProps['location']) {
   const [isClick, setIsClick] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const {panResponder, panY, openDetailShop, translationY} = useDragAnimation();
 
   const handleHoverIn = () => {
     setIsHovered(true);
