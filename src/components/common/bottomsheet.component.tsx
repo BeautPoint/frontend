@@ -8,7 +8,7 @@ import ShopPreview from '../shop/preview.component';
 
 const {height} = Dimensions.get('screen');
 
-function BottomSheet({navigation}: NavigationProps['shopDetails']) {
+function BottomSheet({navigation}: NavigationProps['location']) {
   // const {panResponder, panY} = useDragAnimation();
   const translationY = React.useRef(0);
   const panY = React.useRef(new Animated.Value(0)).current;
