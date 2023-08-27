@@ -5,7 +5,7 @@ import SearchIcon from '@/assets/icons/searchIcon.svg';
 import BackIcon from '@/assets/icons/backIcon.svg';
 import {NavigationProps} from '@/types/stackprops';
 
-function SearchView({navigation}: NavigationProps['search']) {
+function SearchView({navigation}: NavigationProps['location']) {
   return (
     <S.SerachViewLayout>
       <S.SearchInputBox>
