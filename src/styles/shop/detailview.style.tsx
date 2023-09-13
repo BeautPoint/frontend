@@ -23,7 +23,7 @@ const TabBox = styled(CommonStyle)`
   border-bottom-color: #f4f5f6;
 `;
 const Tabs = styled.Pressable<PropsType['tabs']>`
-  width: 33%;
+  width: 50%;
   height: 40px;
   border-bottom-width: ${({isSelected}) => (isSelected ? '2px' : '0px')};
   display: flex;
@@ -32,7 +32,6 @@ const Tabs = styled.Pressable<PropsType['tabs']>`
 `;
 
 const DetailTabs = styled.View`
-  padding: 30px 20px;
   background: #ffffff;
   min-height: 150px;
 `;
