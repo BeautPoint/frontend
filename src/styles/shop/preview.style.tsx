@@ -2,14 +2,17 @@ import styled from 'styled-components/native';
 
 interface PropsType {
   text: {size?: string; weight?: string};
+  previewLayOut: {paddingHorizontal?: number};
 }
 
 const CommonStyle = styled.View`
   margin-bottom: 5px;
 `;
 
-const PreviewLayOut = styled.View`
+const PreviewLayOut = styled.View<PropsType['previewLayOut']>`
   width: 100%;
+  padding-left: ${({paddingHorizontal}) => paddingHorizontal || 0}px;
+  padding-right: ${({paddingHorizontal}) => paddingHorizontal || 0}px;
 `;
 
 const ShopName = styled(CommonStyle)`
