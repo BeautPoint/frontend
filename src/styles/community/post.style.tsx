@@ -4,7 +4,11 @@ const PostLayout = styled.View`
   width: 100%;
   /* border-bottom-width: 1px;
   border-bottom-color: #bdbdbd; */
-  margin-bottom: 10px;
+  margin-bottom: 100px;
+`;
+
+const PostContainer = styled.Pressable`
+  margin-bottom: 3px;
   padding: 0 20px;
   background: #ffffff;
 `;
@@ -82,9 +86,12 @@ const BottomBox = styled.View`
 const ActionButton = styled.Pressable`
   width: 50%;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 `;
+
+const ButtonIcon = styled.View``;
 
 const DividerLine = styled.View`
   border-right-width: 1px;
@@ -94,6 +101,7 @@ const DividerLine = styled.View`
 
 export {
   PostLayout,
+  PostContainer,
   TopBox,
   MainBox,
   BottomBox,
@@ -109,5 +117,6 @@ export {
   TagBox,
   PostTag,
   ActionButton,
+  ButtonIcon,
   DividerLine,
 };
