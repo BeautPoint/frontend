@@ -36,10 +36,18 @@ const TabMenu = styled.Pressable<PropsType['tabMenu']>`
   border-bottom-color: ${({border}) => (border ? '#619bff' : '#bcbcbc')};
 `;
 
-const SearchButton = styled.Pressable`
+const ActionButtonLayout = styled.View`
   position: absolute;
-  right: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 50px;
+  right: 20px;
 `;
+
+const SearchButton = styled.Pressable``;
+const NotificationButton = styled.Pressable``;
 
 const DropdownBox = styled.View`
   height: 50px;
@@ -82,6 +90,8 @@ export {
   HeaderLayout,
   TabBox,
   TabMenu,
+  ActionButtonLayout,
+  NotificationButton,
   SearchButton,
   DropdownBox,
   DrobdownLabel,
