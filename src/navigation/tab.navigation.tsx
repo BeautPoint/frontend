@@ -12,7 +12,7 @@ function TabNavigation() {
     <>
       <Tab.Navigator
         screenOptions={{
-          tabBarActiveTintColor: '#619BFF', // 활성화된 탭의 라벨 색상
+          tabBarActiveTintColor: '#4D84E3', // 활성화된 탭의 라벨 색상
           tabBarInactiveTintColor: '#8C939C',
           tabBarStyle: {
             backgroundColor: '#ffffff',
@@ -37,9 +37,11 @@ function TabNavigation() {
                         height: 30,
                       }}>
                       <li.icon
-                        color={focused ? '#619BFF' : '#c9c9c9'}
+                        color={focused ? '#4D84E3' : '#777777'}
                         width={20}
                         height={20}
+                        fill={focused ? '#4D84E3' : 'none'}
+                        strokeWidth={1}
                       />
                     </View>
                   );
@@ -55,7 +57,8 @@ function TabNavigation() {
                     <AppText
                       style={{
                         height: 20,
-                        marginTop: Platform.OS === 'android' && focused ? 2 : 0,
+                        marginTop:
+                          Platform.OS === 'android' && focused ? -1 : 0,
                         color,
                         fontFamily: focused
                           ? 'Pretendard-ExtraBold'
