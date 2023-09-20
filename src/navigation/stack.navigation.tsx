@@ -38,6 +38,11 @@ function StackNavigation() {
         component={CommunityPostDetail}
         options={{headerShown: false}}
       />
+      <Stack.Screen
+        name="HomeSearch"
+        component={HomeSearchScreen}
+        options={{headerShown: false}}
+      />
       {/* <Stack.Screen name="Confirm" component={ConfirmModal} /> */}
     </Stack.Navigator>
   );
