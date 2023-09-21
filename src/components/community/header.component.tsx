@@ -4,6 +4,8 @@ import DownIcon from '@/assets/icons/downIcon.svg';
 import SearchIcon from '@/assets/icons/searchIcon.svg';
 import {useRecoilValue, useSetRecoilState} from 'recoil';
 import communityState from '@/recoil/community/community.recoil';
+import BellIcon from '@/assets/icons/bellIcon.svg';
+import HeaderActionButtons from './actionButtons.component';
 
 function CommunityHeader() {
   const communityInfo = useRecoilValue(communityState);
@@ -33,9 +35,7 @@ function CommunityHeader() {
             </S.TabMenu>
           );
         })}
-        <S.SearchButton>
-          <SearchIcon color="black" />
-        </S.SearchButton>
+        <HeaderActionButtons />
       </S.TabBox>
       <S.DropdownBox>
         <S.CategoryDrobdown>
