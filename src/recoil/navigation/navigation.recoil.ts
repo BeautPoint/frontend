@@ -9,9 +9,10 @@ import LocationIcon from '@/assets/icons/locationIcon.svg';
 import CommunityIcon from '@/assets/icons/communityIcon.svg';
 import LikeIcon from '@/assets/icons/heartIcon.svg';
 import ProfileIcon from '@/assets/icons/profileIcon.svg';
+import {randomString} from '@/utils/randomString.util';
 
 const navigationState = atom({
-  key: 'navigationState',
+  key: `navigationState/${randomString()}`,
   default: {
     modalOpen: false,
     tabNavigationState: [
