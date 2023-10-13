@@ -7,7 +7,7 @@ interface PropsType {
 
 const BannerLayout = styled.View<PropsType['image']>`
   border-radius: 10px;
-  width: 100%;
+  width: ${({width}) => width || 0}px;
   height: 150px;
 `;
 
