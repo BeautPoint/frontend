@@ -2,17 +2,24 @@ import {Animated} from 'react-native';
 import styled from 'styled-components/native';
 
 interface PropsType {
-  shopInfoLayOut: {height?: string};
-  animatedView: {bottom: string};
+  shopInfoLayOut: {height?: number; padding?: boolean};
+  animatedView: {bottom: boolean};
 }
 
-const ShopInfoLayOut = styled.View<PropsType['shopInfoLayOut']>`
+const ShopInfoLayOut = styled.ScrollView<PropsType['shopInfoLayOut']>`
   width: 100%;
-  height: ${({height}) => height || '180px'};
+  height: ${({height}) => height || 180}px;
+  /* height: 300px; */
   border-radius: 20px;
   background: #ffffff;
   z-index: 4;
-  padding: 0 20px;
+  padding: ${({padding}) => (!padding ? '0px' : '0px 20px')};
+`;
+
+const ScrollView = styled.ScrollView`
+  width: 100%;
+  /* padding-bottom: 40px; */
+  background: #f4f5f6;
 `;
 
 const HandleSection = styled.View`
@@ -31,11 +38,14 @@ const DragHandle = styled.View`
 
 const AnimatedView = styled(Animated.View)<PropsType['animatedView']>`
   position: absolute;
-  bottom: ${({bottom}) => bottom || '-72%'};
+  /* bottom: ${({bottom}) => (bottom ? 0 : '-72%')}; */
+  /* bottom: ${({bottom}) => (bottom ? '-79%' : '-76%')}; */
+  bottom: -76%;
   left: 0;
   right: 0;
-  height: 100%;
+  height: 105%;
   background: #ffffff;
+  z-index: 2;
 `;
 
-export {ShopInfoLayOut, HandleSection, DragHandle, AnimatedView};
+export {ShopInfoLayOut, HandleSection, ScrollView, DragHandle, AnimatedView};
