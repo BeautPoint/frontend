@@ -73,10 +73,16 @@ const DeleteKeyword = styled.Pressable`
   margin-right: 5px;
 `;
 
+const SearchIconBox = styled.View`
+  position: absolute;
+  right: 20px;
+`;
+
 const PopularSearchBox = styled.View``;
 
 export {
   SerachViewLayout,
+  SearchIconBox,
   SearchInputBox,
   SearchInput,
   BackButton,
