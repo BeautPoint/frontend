@@ -27,6 +27,7 @@ const navigationState = atom({
       {id: 3, name: '찜', component: WishlistScreen, icon: LikeIcon},
       {id: 4, name: '마이', component: ProfileScreen, icon: ProfileIcon},
     ],
+    searchScreenType: 'Home',
   },
 });
 
