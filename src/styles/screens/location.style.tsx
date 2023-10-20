@@ -1,6 +1,10 @@
 import {Shadow} from 'react-native-shadow-2';
 import styled from 'styled-components/native';
 
+interface PropsType {
+  boxShadow: {width: number};
+}
+
 const LocationLayOut = styled.View`
   width: 100%;
   height: 100%;
@@ -29,10 +33,11 @@ const MyLocation = styled.Pressable`
   justify-content: center;
 `;
 
-const BoxShadow = styled(Shadow).attrs({
+const BoxShadow = styled(Shadow).attrs<PropsType['boxShadow']>({
   startColor: 'rgba(113, 121, 132, 0.20)',
   offset: [2, 4],
 })`
+  width: ${({width}) => width}px;
   border-radius: 10px;
 `;
 
