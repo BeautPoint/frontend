@@ -10,5 +10,13 @@ export const useCommunityPosts = () => {
       likeButton: state.likeButton === id ? '' : id,
     }));
   };
-  return {likeButtonHandle};
+
+  const dropdownBackgroundHandle = () => {
+    setState(prev => ({
+      ...prev,
+      showReportDropdown: false,
+    }));
+  };
+
+  return {likeButtonHandle, dropdownBackgroundHandle};
 };
