@@ -12,6 +12,7 @@ const communityState = atom({
     ],
     selectedTab: '전체보기',
     likeButton: '' as string | number,
+    showReportDropdown: false,
   },
 });
 
