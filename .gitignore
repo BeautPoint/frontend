@@ -79,3 +79,6 @@ fonts
 
 #react-native-config
 ios/tmp.xcconfig
+
+#TEST
+test.tsx
