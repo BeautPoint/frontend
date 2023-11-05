@@ -76,6 +76,7 @@ androidkey
 fonts
 *.woff
 *.otf
+*.svg
 
 #react-native-config
 ios/tmp.xcconfig
