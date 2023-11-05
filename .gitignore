@@ -81,5 +81,6 @@ fonts
 #react-native-config
 ios/tmp.xcconfig
 
-#TEST
+#TS file
 test.tsx
+exporticon.ts
