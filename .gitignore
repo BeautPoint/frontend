@@ -84,3 +84,4 @@ ios/tmp.xcconfig
 #TS file
 test.tsx
 exporticon.ts
+bottomTest.*.tsx
