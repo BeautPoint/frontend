@@ -2,12 +2,10 @@ import * as S from '@/styles/common/searchinput.style';
 import SearchIcon from '@/assets/icons/searchIcon.svg';
 import {useState} from 'react';
 import {NavigationProps} from '@/types/stackprops';
-import MyLocationIcon from '@/assets/icons/gpsIcon.svg';
 import {AppText} from '@/styles/global.style';
 
-function SearchInput() {
+function SearchInput({navigation}: NavigationProps['home' | 'location']) {
   const [isHovered, setIsHovered] = useState(false);
-
   const handleHoverIn = () => {
     setIsHovered(true);
   };
@@ -17,7 +15,10 @@ function SearchInput() {
   };
 
   return (
-    <S.SearchButton onPressIn={handleHoverIn} onPressOut={handleHoverOut}>
+    <S.SearchButton
+      onPressIn={handleHoverIn}
+      onPressOut={handleHoverOut}
+      onPress={() => navigation.navigate('HomeSearch')}>
       <S.IconBox>
         <SearchIcon color={isHovered ? '#cacaca' : '#337EFF'} />
       </S.IconBox>
