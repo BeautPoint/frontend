@@ -1,6 +1,5 @@
 import * as S from '@/styles/community/post.style';
 import {AppText} from '@/styles/global.style';
-import DotsIcon from '@/assets/icons/dotsIcon.svg';
 import CommunityUserInfo from '@/components/community/userinfo.component';
 import {useCommunityQuery} from '@/api/community/post.api';
 import ThumbsupIcon from '@/assets/icons/thumbsupIcon.svg';
@@ -13,15 +12,38 @@ import {FlatList} from 'react-native';
 
 function CommunityPost({navigation}: NavigationProps['community']) {
   const {postData} = useCommunityQuery();
-  const {likeButtonHandle} = useCommunityPosts();
+  const {likeButtonHandle, detailPostData} = useCommunityPosts();
   const {likeButton} = useRecoilValue(communityState);
+  const selectedPostHandle = (
+    id: number,
+    description: string,
+    nickname: string,
+    title: string,
+    viewCount: number,
+  ) => {
+    detailPostData(id, description, nickname, title, viewCount);
+    navigation.navigate('Community');
+  };
   const renderItem = ({item: post}) => {
     const buttonisActived = likeButton === post.id ? '#619BFF' : '#9a9a9a';
+
     return (
       <S.PostContainer
         key={post.id}
-        onPress={() => navigation.navigate('Community')}>
-        <CommunityUserInfo />
+        onPress={() =>
+          selectedPostHandle(
+            post.id,
+            post.description,
+            post.nickname,
+            post.title,
+            post.viewCount,
+          )
+        }>
+        <CommunityUserInfo
+          postId={post.id}
+          nickname={post.nickname}
+          viewCount={post.viewCount}
+        />
         <S.MainBox>
           <S.PostTitle>
             <AppText size="16px" weight="SemiBold">
