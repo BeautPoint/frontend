@@ -4,28 +4,38 @@ import {AppText} from '@/styles/global.style';
 import PostComments from './comments.component';
 import DetailHeader from '@/components/community/detail/detailHeader.component';
 import {NavigationProps} from '@/types/stackprops';
+import {useRecoilValue} from 'recoil';
+import communityState from '@/recoil/community/community.recoil';
+import {ReportDropdownBackground} from '@/styles/screens/community.style';
+import {useCommunityPosts} from '@/hooks/community/communityPosts.hook';
 
 function CommunityPostDetail({navigation}: NavigationProps['community']) {
+  const {detailPostApi, showReportDropdown} = useRecoilValue(communityState);
+  const {dropdownBackgroundHandle} = useCommunityPosts();
   return (
     <S.DetailLayout>
       <DetailHeader navigation={navigation} />
       <S.PostMainSection>
-        <CommunityUserInfo />
+        <CommunityUserInfo
+          postId={detailPostApi?.id}
+          nickname={detailPostApi?.nickname}
+          viewCount={detailPostApi?.viewCount}
+        />
         <S.MainBox>
           <S.PostTitle>
             <AppText weight="SemiBold" size="18px">
-              제목이다.
+              {detailPostApi?.title}
             </AppText>
           </S.PostTitle>
           <S.PostBody>
-            <AppText>
-              자연스럽게 하는 곳 아시는 분 있나요? 아시는 분 있으면
-              소개부탁드릴게요 서울/경기 지역 입니다:)
-            </AppText>
+            <AppText>{detailPostApi?.description}</AppText>
           </S.PostBody>
         </S.MainBox>
       </S.PostMainSection>
       <PostComments />
+      {showReportDropdown ? (
+        <ReportDropdownBackground onPress={() => dropdownBackgroundHandle()} />
+      ) : null}
     </S.DetailLayout>
   );
 }
