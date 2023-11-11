@@ -9,7 +9,9 @@ function HomeCategories() {
     <S.CategoriesLayout>
       {categoryList.map(item => (
         <S.CategoryBox key={item.id}>
-          <S.IconSection />
+          <S.IconSection>
+            <item.icon />
+          </S.IconSection>
           <AppText size="12px">{item.name}</AppText>
         </S.CategoryBox>
       ))}
