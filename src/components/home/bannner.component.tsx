@@ -1,3 +1,4 @@
+import {SlideDots, SlideDotsBox} from '@/styles/common/slideDots.style';
 import * as S from '@/styles/home/banner.style';
 import {useRef, useState} from 'react';
 import {Dimensions, FlatList, View} from 'react-native';
@@ -27,7 +28,7 @@ function HomeBanner() {
   }).current;
 
   return (
-    <S.BannerLayout width={width}>
+    <S.BannerLayout width={width * 0.9}>
       <FlatList
         horizontal
         pagingEnabled
@@ -48,6 +49,16 @@ function HomeBanner() {
           </View>
         )}
       />
+      <SlideDotsBox>
+        {images.length > 1 &&
+          images.map(item => (
+            <SlideDots
+              size="6px"
+              background={item.id === currentItemId ? '#ffffff' : '#b5b5b5'}
+              key={item.id}
+            />
+          ))}
+      </SlideDotsBox>
     </S.BannerLayout>
   );
 }
