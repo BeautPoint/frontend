@@ -2,8 +2,13 @@ import {AppText} from '@/styles/global.style';
 import * as S from '@/styles/home/homeHeader.style';
 import Notification from '@/assets/icons/bellIcon.svg';
 import SearchInput from '@/components/common/searchinput.component';
+import {NavigationProps} from '@/types/stackprops';
 
-function HomeHeader() {
+function HomeHeader({navigation}: NavigationProps['home']) {
+  const searchHandle = () => {
+    navigation.navigate('HomeSearch');
+  };
+
   return (
     <S.HeaderLayout>
       <S.TopBox>
@@ -15,7 +20,9 @@ function HomeHeader() {
         </S.NotificationButton>
       </S.TopBox>
       <S.BottomBox>
-        <SearchInput />
+        <S.SearchBox onPress={() => searchHandle()}>
+          <SearchInput navigation={navigation} />
+        </S.SearchBox>
       </S.BottomBox>
     </S.HeaderLayout>
   );
