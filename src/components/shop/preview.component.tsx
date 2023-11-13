@@ -2,12 +2,14 @@ import {AppText} from '@/styles/global.style';
 import * as S from '@/styles/shop/preview.style';
 import StartIcon from '@/assets/icons/starIcon.svg';
 import {Dimensions, Platform} from 'react-native';
+import {useRecoilValue} from 'recoil';
+import shopState from '@/recoil/shop/shop.recoil';
 
 function ShopPreview() {
-  const {width} = Dimensions.get('window');
-  console.log(width);
+  const shopInfo = useRecoilValue(shopState);
+
   return (
-    <S.PreviewLayOut>
+    <S.PreviewLayOut paddingHorizontal={!shopInfo.previewFullScreen ? 20 : 0}>
       <S.ShopName>
         <S.RatingStars>
           <StartIcon />
