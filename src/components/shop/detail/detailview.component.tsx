@@ -1,9 +1,11 @@
 import {AppText} from '@/styles/global.style';
 import * as S from '@/styles/shop/detailview.style';
 import React, {useState} from 'react';
-import ShopReview from './review.component';
+import ShopReview from '@/components/shop/detail/review.component';
+import DetailShopInfo from '@/components/shop/detail/shopInfo.component';
+import {NavigationProps} from '@/types/stackprops';
 
-function ShopDetailView() {
+function ShopDetailView({navigation}: NavigationProps['home' | 'location']) {
   const [tabValuse, setTabValues] = useState([
     {
       id: 0,
@@ -41,12 +43,15 @@ function ShopDetailView() {
                 <AppText>{li.introduction}</AppText>
               </S.Introduction>
               <S.Description>
-
               </S.Description>
             </React.Fragment>
           ) : null,
         )} */}
-        <ShopReview />
+        {isActive === 0 ? (
+          <DetailShopInfo />
+        ) : (
+          <ShopReview navigation={navigation} />
+        )}
       </S.DetailTabs>
     </S.DetailViewLayOut>
   );
