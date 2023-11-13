@@ -7,6 +7,7 @@ import SaveIcon from '@/assets/icons/saveIcon.svg';
 import {Dimensions, FlatList} from 'react-native';
 import React, {useState} from 'react';
 import LeftIcon from '@/assets/icons/leftIcon.svg';
+import {SlideDots, SlideDotsBox} from '@/styles/common/slideDots.style';
 
 function ShopOverView() {
   const {width} = Dimensions.get('screen');
@@ -54,15 +55,15 @@ function ShopOverView() {
           )}
         />
         {/* background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 60.88%, rgba(0, 0, 0, 0.30) 100%), url(<path-to-image>), lightgray 50% / contain no-repeat; */}
-        <S.SlideDotsBox>
+        <SlideDotsBox>
           {images.length > 1 &&
             images.map(item => (
-              <S.SlideDots
+              <SlideDots
                 background={item.id === currentItemId ? '#619BFF' : '#FFFFFF'}
                 key={item.id}
               />
             ))}
-        </S.SlideDotsBox>
+        </SlideDotsBox>
       </S.Slider>
       <S.ShopInfoBox>
         <ShopPreview />
@@ -71,13 +72,13 @@ function ShopOverView() {
           <AppText>오늘 15명이 이곳을 보고 갔어요!</AppText>
         </S.ViewCounter>
         <S.ButtonBox>
-          <S.ActionButton>
+          <S.ActionButton onPress={() => console.log('전화하기')}>
             <S.ButtonIcon>
               <CallIcon />
             </S.ButtonIcon>
             <AppText size="15px">전화하기</AppText>
           </S.ActionButton>
-          <S.ActionButton>
+          <S.ActionButton onPress={() => console.log('저장하기')}>
             <S.ButtonIcon>
               <SaveIcon />
             </S.ButtonIcon>
