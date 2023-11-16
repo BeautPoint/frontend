@@ -5,10 +5,8 @@ export const useHomeScreenHooks = () => {
   const [state, setState] = useRecoilState(HomeState);
 
   const shopLikeHandle = (shop: any) => {
-    console.log(shop);
     setState(prev => {
       const isTagIncluded = prev.likeShops.some(item => item.id === shop.id);
-      console.log(isTagIncluded);
       const updatedSelectedTags = isTagIncluded
         ? prev.likeShops.filter(item => item.id !== shop.id)
         : [...prev.likeShops, shop];
