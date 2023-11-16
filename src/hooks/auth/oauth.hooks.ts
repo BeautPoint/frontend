@@ -61,7 +61,7 @@ export const useNaverOauth = () => {
     }
   };
 
-  const login = async () => {
+  const naverLogin = async () => {
     try {
       const {successResponse} = await NaverLogin.login({
         appName,
@@ -82,7 +82,7 @@ export const useNaverOauth = () => {
 
   const onPressNaverBtn = async () => {
     try {
-      await login();
+      await naverLogin();
       const {email, nickname, profileImageUrl} = await getProfile();
       setUserInfo({email, nickname, profileImageUrl});
     } catch (err: any) {
