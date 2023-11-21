@@ -1,12 +1,13 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Platform, View} from 'react-native';
+import {Dimensions, Platform, View} from 'react-native';
 import {useRecoilValue} from 'recoil';
 import navigationState from '@/recoil/navigation/navigation.recoil';
 import {AppText} from '@/styles/global.style';
 
 const Tab = createBottomTabNavigator();
-
+const device = Dimensions.get('window');
 function TabNavigation() {
+  console.log(device.height);
   const {tabNavigationState} = useRecoilValue(navigationState);
   return (
     <>
@@ -16,13 +17,14 @@ function TabNavigation() {
           tabBarInactiveTintColor: '#8C939C',
           tabBarStyle: {
             backgroundColor: '#ffffff',
-            height: Platform.OS === 'ios' ? 70 : 80,
+            height: device.height > 800 ? '10%' : '11%',
             paddingLeft: 10,
             paddingRight: 10,
           },
           headerShown: false,
         }}>
         {tabNavigationState.map(li => {
+          const iconName = ['홈', '커뮤니티'];
           return (
             <Tab.Screen
               key={li.id}
@@ -37,7 +39,13 @@ function TabNavigation() {
                         height: 30,
                       }}>
                       <li.icon
-                        color={focused ? '#4D84E3' : '#777777'}
+                        color={
+                          focused && iconName.includes(li.name)
+                            ? '#ffffff'
+                            : focused
+                            ? '#4D84E3'
+                            : '#777777'
+                        }
                         width={20}
                         height={20}
                         fill={focused ? '#4D84E3' : 'none'}
