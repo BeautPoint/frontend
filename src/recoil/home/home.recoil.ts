@@ -1,18 +1,19 @@
 import {randomString} from '@/utils/randomString.util';
 import {atom} from 'recoil';
+import * as Icon from '@/assets/icons/categories/exporticon';
 
 const HomeState = atom({
   key: `shopState/${randomString()}`,
   default: {
     categoryList: [
-      {id: 0, name: '전체'},
-      {id: 1, name: 'SMP 두피'},
-      {id: 2, name: '헤어라인'},
-      {id: 3, name: '눈썹'},
-      {id: 4, name: '아이라인'},
-      {id: 5, name: '입술'},
-      {id: 6, name: '흉터'},
-      {id: 7, name: '문신제거'},
+      {id: 0, name: '전체', icon: Icon.All},
+      {id: 1, name: 'SMP 두피', icon: Icon.Scalp},
+      {id: 2, name: '헤어라인', icon: Icon.HairLine},
+      {id: 3, name: '눈썹', icon: Icon.EyeBrow},
+      {id: 4, name: '아이라인', icon: Icon.EyeLine},
+      {id: 5, name: '입술', icon: Icon.Lips},
+      {id: 6, name: '흉터', icon: Icon.Scar},
+      {id: 7, name: '문신제거', icon: Icon.TatooRemoval},
     ],
     likeShops: [] as {id: number}[],
     shopList: [
