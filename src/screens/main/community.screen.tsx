@@ -6,7 +6,7 @@ import {NavigationProps} from '@/types/stackprops';
 import {useRecoilValue} from 'recoil';
 import communityState from '@/recoil/community/community.recoil';
 import {useCommunityPosts} from '@/hooks/community/communityPosts.hook';
-import CreatePostScreen from '../community/createPost.scree';
+import CreatePostScreen from '../community/createPost.screen';
 
 function CommunityScreen({navigation}: NavigationProps['community']) {
   const {showReportDropdown} = useRecoilValue(communityState);
