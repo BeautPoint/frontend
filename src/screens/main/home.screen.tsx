@@ -11,7 +11,7 @@ function HomeScreen({navigation}: NavigationProps['home']) {
       <HomeHeader navigation={navigation} />
       <HomeBanner />
       <HomeCategories />
-      <RecommendedShop />
+      <RecommendedShop navigation={navigation} />
     </S.HomeLayOut>
   );
 }
