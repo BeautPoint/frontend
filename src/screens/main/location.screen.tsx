@@ -4,13 +4,11 @@ import * as S from '@/styles/screens/location.style';
 import {NavigationProps} from '@/types/stackprops';
 import SearchView from '@/screens/search/searchview.screen';
 import {useState} from 'react';
-import {AppText} from '@/styles/global.style';
-import SearchIcon from '@/assets/icons/searchIcon.svg';
 import {Dimensions} from 'react-native';
-import {useDragAnimation} from '@/hooks/common/draganimation.hook';
 import MyLocationIcon from '@/assets/icons/gpsIcon.svg';
+import SearchInput from '@/components/common/searchinput.component';
 
-const {height} = Dimensions.get('screen');
+const {height, width} = Dimensions.get('screen');
 
 function LocationScreen({navigation}: NavigationProps['location']) {
   const [isClick, setIsClick] = useState(false);
@@ -33,18 +31,8 @@ function LocationScreen({navigation}: NavigationProps['location']) {
   return (
     <S.LocationLayOut>
       <S.SearchInputBox>
-        <S.BoxShadow>
-          <S.SearchButton
-            onPressIn={handleHoverIn}
-            onPressOut={handleHoverOut}
-            onPress={focushandle}>
-            <S.IconBox>
-              <SearchIcon color={isHovered ? '#cacaca' : '#337EFF'} />
-            </S.IconBox>
-            <AppText color={isHovered ? '#cacaca' : '#8C939C'}>
-              관심있는 시술 부위, 병원을 검색해보세요!
-            </AppText>
-          </S.SearchButton>
+        <S.BoxShadow width={width * 0.9}>
+          <SearchInput navigation={navigation} screenType={'location'} />
         </S.BoxShadow>
         <S.MyLocation>
           <MyLocationIcon />
@@ -55,6 +43,7 @@ function LocationScreen({navigation}: NavigationProps['location']) {
       {isClick && <SearchView navigation={navigation} />}
       <MapComponent />
       <BottomSheet navigation={navigation} />
+      {/* <DraggableBottomSheet /> */}
     </S.LocationLayOut>
   );
 }
