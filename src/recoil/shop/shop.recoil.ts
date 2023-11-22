@@ -1,3 +1,5 @@
+import {navigationState} from '@/recoil/navigation/navigation.recoil';
+import {NavigationProps} from './../../types/stackprops';
 import {randomString} from '@/utils/randomString.util';
 import {atom} from 'recoil';
 
@@ -12,9 +14,8 @@ const shopState = atom({
       {id: 2, description: '깨끗하고 위생이 좋아요'},
       {id: 3, description: '인테리어와 시설이 좋아요'},
       {id: 4, description: '가성비가 좋아요'},
-      {id: 5, description: ''},
-      {id: 6, description: ''},
     ],
+    navigate: () => {},
   },
 });
 
