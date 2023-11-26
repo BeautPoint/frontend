@@ -36,6 +36,21 @@ const CreatedAt = styled.View`
 `;
 const Views = styled.View``;
 
+const ReportButton = styled.Pressable`
+  width: 20px;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 0;
+`;
+
+const ReportDropdown = styled.View`
+  position: absolute;
+  right: 0;
+  bottom: -10px;
+  z-index: 2;
+`;
+
 export {
   UserInfoLayout,
   InfoBox,
@@ -44,4 +59,6 @@ export {
   UserName,
   CreatedAt,
   Views,
+  ReportButton,
+  ReportDropdown,
 };
