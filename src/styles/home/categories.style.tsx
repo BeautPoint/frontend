@@ -13,18 +13,21 @@ const CategoriesLayout = styled.View`
 
 const CategoryBox = styled.View`
   width: 80px;
-  height: 90px;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 const IconSection = styled.View`
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   border-radius: 50px;
   margin-bottom: 10px;
-  background: #d5d5d5;
+  background: #f4f5f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export {CategoriesLayout, CategoryBox, IconSection};
