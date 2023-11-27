@@ -18,8 +18,20 @@ const TopBox = styled(CommonStyle)`
 `;
 const BottomBox = styled(CommonStyle)``;
 
+const SearchBox = styled.Pressable`
+  width: 100%;
+  height: 100%;
+`;
+
 const LogoIcon = styled.View``;
 
 const NotificationButton = styled.Pressable``;
 
-export {HeaderLayout, LogoIcon, NotificationButton, TopBox, BottomBox};
+export {
+  HeaderLayout,
+  LogoIcon,
+  NotificationButton,
+  TopBox,
+  SearchBox,
+  BottomBox,
+};
