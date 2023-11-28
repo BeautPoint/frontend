@@ -1,16 +1,33 @@
 import styled from 'styled-components/native';
 
-const CommunityLayOut = styled.SafeAreaView`
+const CommunityLayOut = styled.View`
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 15px;
+  /* display: flex; */
 `;
 
-const TitleText = styled.Text`
-  font-size: 18px;
+const ScrollViewBox = styled.View``;
+
+const NewPostButton = styled.Pressable`
+  position: absolute;
+  padding: 10px;
+  background: #619bff;
+  bottom: 20px;
+  right: 20px;
+  border-radius: 50px;
 `;
 
-export {CommunityLayOut, TitleText};
+const ReportDropdownBackground = styled.Pressable`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  /* background: black; */
+  z-index: 1;
+`;
+
+export {
+  CommunityLayOut,
+  ScrollViewBox,
+  NewPostButton,
+  ReportDropdownBackground,
+};
