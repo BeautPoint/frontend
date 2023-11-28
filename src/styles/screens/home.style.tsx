@@ -1,12 +1,10 @@
 import styled from 'styled-components/native';
 
-const HomeLayOut = styled.SafeAreaView`
+const HomeLayOut = styled.ScrollView`
   width: 100%;
-  height: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 15px;
+  padding: 20px;
+  background: #ffffff;
 `;
 
 const TitleText = styled.Text`
