@@ -12,7 +12,7 @@ export const useCommunityQuery = () => {
             'content-Type': 'application/json',
           },
         });
-        setPostData(data.data);
+        setPostData(data);
       } catch (err) {
         return err;
       }
