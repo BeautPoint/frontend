@@ -10,6 +10,7 @@ const confirmModalState = atom({
       {id: 2, text: '(필수) 개인정보 처리방침 동의!', isChecked: false},
       {id: 3, text: '(선택) 광고 정보성 동의', isChecked: false},
     ],
+    optionalConsents: 'N',
     checkBoxStyle: {
       fillColor: 'gray',
       size: 15,
