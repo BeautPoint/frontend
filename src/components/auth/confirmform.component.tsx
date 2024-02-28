@@ -8,10 +8,10 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import {useRecoilValue} from 'recoil';
 
 function ConfirmForm() {
-  const {checkBoxStyle, agreeBody} = useRecoilValue(confirmModalState);
+  const {checkBoxStyle, agreeBody, optionalConsents} =
+    useRecoilValue(confirmModalState);
 
-  const {checkBoxHandle, allCheckBoxHandle} = useConfirmHooks();
-  const navigation = useNavigation();
+  const {checkBoxHandle, allCheckBoxHandle, submitHandle} = useConfirmHooks();
   return (
     <S.ConfirmLayOut>
       <S.Title>
@@ -46,7 +46,7 @@ function ConfirmForm() {
           </S.AgreeBox>
         );
       })}
-      <S.ConfirmButton onPress={() => navigation.navigate('Signup')}>
+      <S.ConfirmButton onPress={() => submitHandle()}>
         <AppText color="#ffffff">가입하기</AppText>
       </S.ConfirmButton>
     </S.ConfirmLayOut>
