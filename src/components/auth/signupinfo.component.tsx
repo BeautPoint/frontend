@@ -9,7 +9,8 @@ import {useRecoilValue} from 'recoil';
 import signupState from '@/recoil/auth/signupInfoForm.recoil';
 
 function SignupInfoForm() {
-  const {datePickerHandle, isActive, getUserGender} = useSignupUserInfo();
+  const {datePickerHandle, isActive, getUserGender, getUserSignupData} =
+    useSignupUserInfo();
   const pickerisOpen = useBoolean();
   const [isOpen, setIsOpen] = useState(false);
   // const isPress = useBoolean();
@@ -57,7 +58,10 @@ function SignupInfoForm() {
         {userInfoForm.genderInfo.map((li, index) => (
           <S.GenderOption
             key={li.id}
-            onPress={() => genderButtonHandle(li.id, li.name)}
+            onPress={() => {
+              getUserSignupData('gender', li.data);
+              genderButtonHandle(li.id, li.name);
+            }}
             isPressed={isPress === li.id}>
             <AppText
               color={isPress === li.id ? '#619bff' : '#5A6068'}
@@ -73,6 +77,7 @@ function SignupInfoForm() {
         mode={'date'}
         date={defaultBirth}
         onConfirm={date => {
+          getUserSignupData('birthDate', new Date(date));
           datePickerHandle(date);
         }}
         onCancel={() => {
