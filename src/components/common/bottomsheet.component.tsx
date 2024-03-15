@@ -6,8 +6,6 @@ import {Dimensions, Platform} from 'react-native';
 import {Animated, PanResponder} from 'react-native';
 import ShopPreview from '../shop/preview.component';
 import ShopDetailScreen from '@/screens/shop/detail.screen';
-import ShopOverView from '../shop/overview.component';
-import ShopDetailView from '../shop/detailview.component';
 import {useRecoilValue, useSetRecoilState} from 'recoil';
 import shopState from '@/recoil/shop/shop.recoil';
 import {useBottomSheetHook} from '@/hooks/shop/bottomsheet.hook';
@@ -81,8 +79,6 @@ function BottomSheet({navigation}: NavigationProps['location']) {
   //     useNativeDriver: true,
   //   }).start();
   // };
-
-  console.log('풀 스크린 :' + previewFullScreen);
 
   return (
     <S.AnimatedView
