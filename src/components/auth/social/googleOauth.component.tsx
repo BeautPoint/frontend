@@ -1,8 +1,9 @@
 import {useGoogleOauth} from '@/hooks/auth/oauth.hooks';
 import GoogleIcon from '@/assets/icons/googleIcon.svg';
 import * as S from '@/styles/auth/oauthButton.style';
+import {NavigationProps} from '@/types/stackprops';
 
-function GoogleOauthButton() {
+function GoogleOauthButton(navigation: NavigationProps['signup']) {
   const {onPressGoogleBtn} = useGoogleOauth();
   return (
     <S.AouthButtonLayOut background="" onPress={() => onPressGoogleBtn()}>
