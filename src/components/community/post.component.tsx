@@ -26,14 +26,13 @@ function CommunityPost({navigation}: NavigationProps['community']) {
   };
   const renderItem = ({item: post}) => {
     const buttonisActived = likeButton === post.id ? '#619BFF' : '#9a9a9a';
-
     return (
       <S.PostContainer
         key={post.id}
         onPress={() =>
           selectedPostHandle(
             post.id,
-            post.description,
+            post.content,
             post.nickname,
             post.title,
             post.viewCount,
@@ -52,7 +51,7 @@ function CommunityPost({navigation}: NavigationProps['community']) {
           </S.PostTitle>
           <S.PostBody>
             <AppText color="#484B56A6" numberOfLines={2}>
-              {post?.description}
+              {post?.content}
             </AppText>
           </S.PostBody>
           <S.TagBox>
