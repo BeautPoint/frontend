@@ -1,30 +1,42 @@
 import * as S from '@/styles/common/navigationHeader.style';
 import {AppText} from '@/styles/global.style';
 import BackIcon from '@/assets/icons/backIcon.svg';
-import {NavigationProps} from '@/types/stackprops';
+import {ShopDetailScreenProps, ShopReviewScreenProps} from '@/types/stackprops';
+import {useShopDetails} from '@/hooks/shop/shopDetail.hook';
+import {useShopReviewQuery} from '@/api/shop/review.api';
 
-interface SType {
-  navigation: any;
-  navType: string;
+interface NavHeaderParams {
+  navigation: ShopDetailScreenProps | ShopReviewScreenProps;
   title: string;
+  isActived: boolean;
+  url: 'brief' | 'detail';
 }
 
-function NavigationHeader({navigation, navType, title}: SType) {
-  console.log(navigation, navType, title);
-  const navigate = () => {
-    navigation.navigation.goBack();
+function NavigationHeader({
+  navigation,
+  title,
+  isActived,
+  url,
+}: NavHeaderParams) {
+  const handleSubmitButton = () => {
+    navigation.goBack();
+    resetReviewData();
+    createShopReview(url);
   };
-  console.log(navigation);
+  const {resetReviewData} = useShopDetails();
+  const {createShopReview} = useShopReviewQuery();
   return (
     <S.HeaderLayout>
-      <S.BackButton onPress={() => navigate()}>
+      <S.BackButton onPress={() => navigation.goBack()}>
         <BackIcon />
       </S.BackButton>
       <S.Title>
         <AppText>{title}</AppText>
       </S.Title>
-      <S.SubmitButton>
-        <AppText>완료</AppText>
+      <S.SubmitButton
+        disabled={!isActived}
+        onPress={() => handleSubmitButton()}>
+        <AppText color={isActived ? 'black' : '#8C939C'}>완료</AppText>
       </S.SubmitButton>
     </S.HeaderLayout>
   );
