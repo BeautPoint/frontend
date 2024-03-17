@@ -8,6 +8,7 @@ import HomeState from '@/recoil/home/home.recoil';
 import {useHomeScreenHooks} from '@/hooks/home/home.hook';
 import {NavigationProps} from '@/types/stackprops';
 import ShopDetailScreen from '@/screens/shop/detail.screen';
+import {useAuthHook} from '@/hooks/auth/auth.hook';
 
 function RecommendedShop({navigation}: NavigationProps['home']) {
   const imgurl = {
@@ -15,9 +16,14 @@ function RecommendedShop({navigation}: NavigationProps['home']) {
   };
 
   const {shopLikeHandle} = useHomeScreenHooks();
-
   const {shopList, likeShops} = useRecoilValue(HomeState);
+  const {accessToken} = useAuthHook();
   const showShopDetail = false;
+
+  const handleLikeButton = (likeShop: any) => {
+    !accessToken ? navigation.navigate('Login') : shopLikeHandle(likeShop);
+  };
+
   console.log(likeShops);
   return (
     <S.RecommendedShopLayout>
@@ -34,7 +40,7 @@ function RecommendedShop({navigation}: NavigationProps['home']) {
             {showShopDetail && <ShopDetailScreen navigation={navigation} />}
             <S.ShopContainer onPress={() => navigation.navigate('ShopDetails')}>
               <S.ImageBox>
-                <S.LikeButton onPress={() => shopLikeHandle(item)}>
+                <S.LikeButton onPress={() => handleLikeButton(item)}>
                   <HeartIcon
                     color="#ffffff"
                     fill={
