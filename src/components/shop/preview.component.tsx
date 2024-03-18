@@ -6,17 +6,16 @@ import {useRecoilValue} from 'recoil';
 import shopState from '@/recoil/shop/shop.recoil';
 
 function ShopPreview() {
-  const shopInfo = useRecoilValue(shopState);
-
+  const {previewFullScreen, selectedShop} = useRecoilValue(shopState);
   return (
-    <S.PreviewLayOut paddingHorizontal={!shopInfo.previewFullScreen ? 20 : 0}>
+    <S.PreviewLayOut paddingHorizontal={!previewFullScreen ? 20 : 0}>
       <S.ShopName>
         <S.RatingStars>
           <StartIcon />
           <AppText>4.5</AppText>
         </S.RatingStars>
-        <AppText size="22px" weight="Bold">
-          모발모발 병원
+        <AppText numberOfLines={1} size="22px" weight="Bold">
+          {selectedShop.name}
         </AppText>
       </S.ShopName>
       <S.ShopHours>
@@ -28,7 +27,7 @@ function ShopPreview() {
         </S.Hours>
       </S.ShopHours>
       <S.ShopAddress>
-        <AppText color="#717984">서울시 마포구 서교동</AppText>
+        <AppText color="#717984">{selectedShop.address}</AppText>
       </S.ShopAddress>
       <S.BadgeBox>
         <S.HighlightBadge>
