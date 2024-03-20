@@ -3,8 +3,9 @@ import React from 'react';
 import {useRecoilValue} from 'recoil';
 import ConfirmForm from '@/components/auth/confirmform.component';
 import BottomUpModal from '@/components/modals/bottomup.component';
+import {NavigationProps} from '@/types/stackprops';
 
-function GlobalModals() {
+function GlobalModals({navigation}: NavigationProps['home']) {
   const {modalOpen} = useRecoilValue(confirmModalState);
 
   return (
