@@ -5,11 +5,21 @@ import {useRecoilValue} from 'recoil';
 import CommentIcon from '@/assets/icons/shopDetail/commentIcon.svg';
 import {NavigationProps} from '@/types/stackprops';
 import BriefReviewScreen from '../review/briefReview.component';
+import DetailReviewScreen from '../review/detailReview.component';
+import {useAuthHook} from '@/hooks/auth/auth.hook';
 
 function ShopReview({navigation}: NavigationProps['shopDetails']) {
   const {BriefReviewList} = useRecoilValue(shopState);
   const showScreen = false;
-  console.log(navigation);
+  const {accessToken} = useAuthHook();
+
+  const handleWriteReview = (reviewType: 'BriefReiview' | 'DetailReiview') => {
+    if (!accessToken) {
+      return navigation.navigate('Login');
+    }
+    navigation.navigate(reviewType);
+  };
+
   return (
     <S.ReviewLayout>
       <S.BriefReview>
@@ -17,7 +27,7 @@ function ShopReview({navigation}: NavigationProps['shopDetails']) {
           <AppText size="15px" weight="SemiBold">
             이런 점이 좋았어요
           </AppText>
-          <S.ActionButton onPress={() => navigation.navigate('BriefReiview')}>
+          <S.ActionButton onPress={() => handleWriteReview('BriefReiview')}>
             <S.IconBox>
               <CommentIcon />
             </S.IconBox>
@@ -41,7 +51,7 @@ function ShopReview({navigation}: NavigationProps['shopDetails']) {
           <AppText size="15px" weight="SemiBold">
             방문자 리뷰
           </AppText>
-          <S.ActionButton>
+          <S.ActionButton onPress={() => handleWriteReview('DetailReiview')}>
             <S.IconBox>
               <CommentIcon />
             </S.IconBox>
@@ -55,7 +65,9 @@ function ShopReview({navigation}: NavigationProps['shopDetails']) {
           </S.defaultText>
         </S.ReviewList>
       </S.DetailReview>
-      {showScreen && <BriefReviewScreen navigation={navigation} />}
+      {showScreen && <BriefReviewScreen navigation={navigation} /> && (
+        <DetailReviewScreen navigation={navigation} />
+      )}
     </S.ReviewLayout>
   );
 }
