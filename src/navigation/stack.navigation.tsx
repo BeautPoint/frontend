@@ -8,6 +8,9 @@ import LocationSearchScreen from '@/screens/search/searchview.screen';
 import HomeSearchScreen from '@/screens/home/homeSerach.screen';
 import CreatePostScreen from '@/screens/community/createPost.screen';
 import BriefReviewScreen from '@/components/shop/review/briefReview.component';
+import DetailReviewScreen from '@/components/shop/review/detailReview.component';
+import SettingScreen from '@/components/profile/setting/settingsScreen.component';
+import SettingsDetails from '@/components/profile/setting/settingsDetail.component';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,9 +22,13 @@ function StackNavigation() {
         component={TabNavigation}
         options={{headerShown: false}}
       />
-      <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen
-        name="Signup"
+        name="Login"
+        component={LoginScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SignUp"
         component={SignupScreen}
         options={{headerShown: false}}
       />
@@ -53,6 +60,22 @@ function StackNavigation() {
       <Stack.Screen
         name="BriefReiview"
         component={BriefReviewScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="DetailReiview"
+        component={DetailReviewScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SettingView"
+        component={SettingScreen}
+        options={{headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="SettingsDetail"
+        component={SettingsDetails}
         options={{headerShown: false}}
       />
 
