@@ -1,14 +1,21 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Dimensions, Platform, View} from 'react-native';
-import {useRecoilValue} from 'recoil';
+import {Dimensions, Platform, Pressable, View} from 'react-native';
+import {useRecoilState, useRecoilValue} from 'recoil';
 import navigationState from '@/recoil/navigation/navigation.recoil';
 import {AppText} from '@/styles/global.style';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import ProfileScreen from '@/screens/main/profile.screen';
+import LoginScreen from '@/screens/auth/login.screen';
+import {useAuthHook} from '@/hooks/auth/auth.hook';
 
 const Tab = createBottomTabNavigator();
 const device = Dimensions.get('window');
+
 function TabNavigation() {
   console.log(device.height);
-  const {tabNavigationState} = useRecoilValue(navigationState);
+  const [navState, setNavState] = useRecoilState(navigationState);
+  const {accessToken} = useAuthHook();
+
   return (
     <>
       <Tab.Navigator
@@ -23,13 +30,21 @@ function TabNavigation() {
           },
           headerShown: false,
         }}>
-        {tabNavigationState.map(li => {
+        {navState.tabNavigationState.map(li => {
           const iconName = ['홈', '커뮤니티'];
           return (
             <Tab.Screen
               key={li.id}
               name={li.name}
               component={li.component}
+              listeners={({navigation}) => ({
+                tabPress: e => {
+                  if (li.name === '마이' && !accessToken) {
+                    e.preventDefault();
+                    navigation.navigate('Login');
+                  }
+                },
+              })}
               options={{
                 tabBarIcon: ({focused}) => {
                   return (
