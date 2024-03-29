@@ -10,10 +10,12 @@ const signupState = atom({
       {id: 1, name: '월', dateValue: ''},
       {id: 2, name: '일', dateValue: ''},
     ],
+    birthDate: '',
     genderInfo: [
-      {id: 0, name: '남자'},
-      {id: 1, name: '여자'},
+      {id: 0, name: '남자', data: 'M'},
+      {id: 1, name: '여자', data: 'F'},
     ],
+    signupUserInfo: {birthDate: Date, gender: ''},
     serviceCategory: [
       {id: 0, description: 'SMP두피'},
       {id: 1, description: '헤어라인'},
