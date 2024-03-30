@@ -28,6 +28,11 @@ const navigationState = atom({
       {id: 4, name: '마이', component: ProfileScreen, icon: ProfileIcon},
     ],
     searchScreenType: 'Home',
+    confirmBottomSheet: false,
+    singupScreen: false,
+    resetToHomeScreen: false,
+    currentScreen: '',
+    headerTitle: '',
   },
 });
 
