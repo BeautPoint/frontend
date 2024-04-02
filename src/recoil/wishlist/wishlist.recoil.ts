@@ -9,6 +9,11 @@ const WishListState = atom({
       {id: 1, name: '좋아요한 글'},
     ],
     seletedTab: '찜한 병원',
+    likedShops: {
+      place_id: '',
+      name: '',
+      shop_image: '',
+    },
   },
 });
 
