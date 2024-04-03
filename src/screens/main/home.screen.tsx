@@ -4,8 +4,15 @@ import HomeBanner from '@/components/home/bannner.component';
 import HomeCategories from '@/components/home/categories.component';
 import RecommendedShop from '@/components/home/recommendedShop.component';
 import {NavigationProps} from '@/types/stackprops';
+import {useRecoilState} from 'recoil';
+import navigationState from '@/recoil/navigation/navigation.recoil';
+import {useHomeScreenHooks} from '@/hooks/home/home.hook';
 
 function HomeScreen({navigation}: NavigationProps['home']) {
+  const [state, setState] = useRecoilState(navigationState);
+  const {handleHomeScreenNavReset} = useHomeScreenHooks();
+  handleHomeScreenNavReset(false);
+  console.log('resetToHomeScreen : ', state.resetToHomeScreen);
   return (
     <S.HomeLayOut>
       <HomeHeader navigation={navigation} />
