@@ -1,34 +1,51 @@
+import ConfirmForm from '@/components/auth/confirmform.component';
 import SingIn from '@/components/auth/signin.component';
 import BottomUpModal from '@/components/modals/bottomup.component';
 import confirmModalState from '@/recoil/modal/confirm.recoil';
-import * as S from '@/styles/screens/auth.style';
+import {AppText} from '@/styles/global.style';
+import * as S from '@/styles/screens/login.style';
+import {NavigationProps} from '@/types/stackprops';
 import {useState} from 'react';
 import {Pressable, Text} from 'react-native';
-import {useSetRecoilState} from 'recoil';
+import {useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
+import AppLogo from '@/assets/images/logo.png';
+import loginState from '@/recoil/auth/loginInfo.recoil';
 
-function LoginScreen() {
-  const [isPress, setIsPress] = useState(false);
-  const setConfirmModal = useSetRecoilState(confirmModalState);
-  const modalHandle = () => {
-    setConfirmModal(prev => ({
-      ...prev,
-      modalOpen: true,
-    }));
+function LoginScreen({navigation}: NavigationProps['signup']) {
+  const {loginScreenWelcomeTexts} = useRecoilValue(loginState);
+  const handleGuestAccess = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{name: 'Home'}],
+    });
   };
+
+  const showScreen = false;
   return (
-    <S.AuthLayOut>
+    <S.LoginScreenLayout>
+      {/* {showScreen ? <ConfirmForm navigation={navigation} /> : null} */}
       <S.DescriptionBox>
-        <S.Description>내 주변 반영구 시술샵,</S.Description>
-        <S.Description>이젠 정확하고 빠르게!</S.Description>
-        <S.Description>OO에 오신걸 환영합니다.</S.Description>
-        <Pressable onPress={() => modalHandle()}>
+        {loginScreenWelcomeTexts.map(item => {
+          return (
+            <S.Description key={item.id}>
+              <AppText size="21px">{item.text}</AppText>
+            </S.Description>
+          );
+        })}
+        {/* <Pressable onPress={() => modalHandle()}>
           <Text>테스트 중</Text>
-        </Pressable>
+        </Pressable> */}
       </S.DescriptionBox>
+      <S.ImageBox>
+        <S.Image source={AppLogo} resizeMode="contain" />
+      </S.ImageBox>
       <S.ButtonBox>
-        <SingIn />
+        <SingIn navigation={navigation} />
+        <S.GuestAccessButton onPress={() => handleGuestAccess()}>
+          <AppText color="#787878">비회원으로 둘러보기</AppText>
+        </S.GuestAccessButton>
       </S.ButtonBox>
-    </S.AuthLayOut>
+    </S.LoginScreenLayout>
   );
 }
 
