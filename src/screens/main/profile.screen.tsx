@@ -1,17 +1,28 @@
 import * as S from '@/styles/screens/profile.style';
-import {Pressable, Text} from 'react-native';
 import {NavigationProps} from '@/types/stackprops';
+import ContentOverView from '@/components/profile/contentOverview.component';
+import ProfileOverView from '@/components/profile/profileOverview.component';
+import {useUserInfoHook} from '@/hooks/user/userinfo.hook';
+import {useFocusEffect} from '@react-navigation/native';
+import {useCallback} from 'react';
+import SettingsDetails from '@/components/profile/setting/settingsDetail.component';
 
-function ProfileScreen({navigation}: NavigationProps['login']) {
+function ProfileScreen({navigation}: NavigationProps['profile']) {
+  const {fetchUserProfile} = useUserInfoHook();
+  useFocusEffect(
+    useCallback(() => {
+      fetchUserProfile();
+      return () => {};
+    }, []),
+  );
+
+  const showScreen = false;
+
   return (
     <S.ProfileLayOut>
-      <S.TitleText>My Page</S.TitleText>
-      <Pressable onPress={() => navigation.navigate('Login')}>
-        <Text>로그인</Text>
-      </Pressable>
-      <Pressable onPress={() => navigation.navigate('Signup')}>
-        <Text>가입하기</Text>
-      </Pressable>
+      <ProfileOverView navigation={navigation} />
+      <ContentOverView />
+      {showScreen && <SettingsDetails navigation={navigation} />}
     </S.ProfileLayOut>
   );
 }
