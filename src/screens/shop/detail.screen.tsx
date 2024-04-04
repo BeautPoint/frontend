@@ -13,8 +13,6 @@ function ShopDetailScreen({navigation}: NavigationProps['home' | 'location']) {
     navigation ? navigation.goBack() : goBackButtonHandle(true);
   };
 
-  console.log(navigation);
-
   return (
     <S.DetailLayOut>
       <S.DragDownBottomSheet height={height * 0.2} />
