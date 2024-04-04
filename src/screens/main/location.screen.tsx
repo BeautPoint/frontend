@@ -7,12 +7,16 @@ import {useState} from 'react';
 import {Dimensions} from 'react-native';
 import MyLocationIcon from '@/assets/icons/gpsIcon.svg';
 import SearchInput from '@/components/common/searchinput.component';
+import {getPlace, usePlaces} from '@/api/google/gooogleCloud.api';
 
 const {height, width} = Dimensions.get('screen');
 
 function LocationScreen({navigation}: NavigationProps['location']) {
   const [isClick, setIsClick] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+
+  const {placesInfo} = usePlaces();
+  console.log(placesInfo);
 
   const handleHoverIn = () => {
     setIsHovered(true);
@@ -41,7 +45,7 @@ function LocationScreen({navigation}: NavigationProps['location']) {
 
       {/* <SearchInput navigation={navigation} /> */}
       {isClick && <SearchView navigation={navigation} />}
-      <MapComponent />
+      <MapComponent placesInfo={placesInfo} />
       <BottomSheet navigation={navigation} />
       {/* <DraggableBottomSheet /> */}
     </S.LocationLayOut>
