@@ -4,7 +4,6 @@ export type RootStackParamList = {
   Home: undefined;
   Details: undefined;
   Login: undefined;
-  Signup: undefined;
   Confirm: undefined;
   Search: undefined;
   ShopDetails: undefined;
@@ -15,7 +14,10 @@ export type RootStackParamList = {
   LocaitSearch: undefined;
   CreatePost: undefined;
   BriefReiview: undefined;
+  DetailReiview: undefined;
   ShopReview: undefined;
+  SettingView: undefined;
+  SettingsDetail: undefined;
 };
 
 type LoginScreenProps = StackNavigationProp<RootStackParamList, 'Login'>;
@@ -30,7 +32,7 @@ type CommunityScreenProps = StackNavigationProp<
   RootStackParamList,
   'Community'
 >;
-type ShopDetailScreenProps = StackNavigationProp<
+export type ShopDetailScreenProps = StackNavigationProp<
   RootStackParamList,
   'ShopDetails'
 >;
@@ -38,9 +40,24 @@ type CreatePostScreenProps = StackNavigationProp<
   RootStackParamList,
   'CreatePost'
 >;
-type ShopReviewScreenProps = StackNavigationProp<
+export type ShopReviewScreenProps = StackNavigationProp<
   RootStackParamList,
   'ShopReview'
+>;
+
+export type SettingsScreenProps = StackNavigationProp<
+  RootStackParamList,
+  'SettingView'
+>;
+
+export type SettingsDetailProps = StackNavigationProp<
+  RootStackParamList,
+  'SettingsDetail'
+>;
+
+type CommonNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  keyof RootStackParamList
 >;
 
 export interface NavigationProps {
@@ -52,4 +69,6 @@ export interface NavigationProps {
   community: {navigation: CommunityScreenProps};
   shopDetails: {navigation: ShopDetailScreenProps};
   shopReview: {navigation: ShopReviewScreenProps};
+  profile: {navigation: SettingsScreenProps};
+  navigation: {navigation: CommonNavigationProp};
 }
