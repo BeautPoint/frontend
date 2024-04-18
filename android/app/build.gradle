@@ -8,8 +8,8 @@ import com.android.build.OutputFile
 
 
 project.ext.envConfigFiles = [
-    developdebug: "env/.env.development",
-    developrelease: "env/.env.development", 
+    developdebug: "env/.env",
+    developrelease: "env/.env", 
     // stagedebug: "env/.env.stage",
     // stagerelease: "env/.env.stage",
     // productdebug: "env/.env.product",    
