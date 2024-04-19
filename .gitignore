@@ -80,6 +80,7 @@ fonts
 
 #react-native-config
 ios/tmp.xcconfig
+GeneratedDotEnv.m
 
 #TS file
 test.tsx
