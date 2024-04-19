@@ -8,13 +8,24 @@
 
 #import <GoogleMaps/GoogleMaps.h>
 
+#import "RNCConfig.h"
+
 @implementation AppDelegate
 
+ /**
+frontend => BeautyPoint 로변경
+*/
+
+/** env googleMapsApiKey */
+
+NSDictionary *config = [RNCConfig env];
+NSString *googleMapsApiKey = [config objectForKey:@"GOOGLE_MAP_IOS"];
+ 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
- [GMSServices provideAPIKey:@"AIzaSyD5_PRng5fWT0lJRTU5JC6rpMP3fh3I9S8"]; // add this line using the api key obtained from Google Console
+ [GMSServices provideAPIKey:googleMapsApiKey]; // add this line using the api key obtained from Google Console
 
-  self.moduleName = @"frontend";
+  self.moduleName = @"BeautyPoint";
   // You can add your custom initial props in the dictionary below.
   // They will be passed down to the ViewController used by React Native.
   self.initialProps = @{};
