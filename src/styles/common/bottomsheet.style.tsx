@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 
 interface PropsType {
   shopInfoLayOut: {height?: number; padding?: boolean};
-  animatedView: {bottom: boolean};
+  animatedView: {bottom: string};
 }
 
 const ShopInfoLayOut = styled.ScrollView<PropsType['shopInfoLayOut']>`
@@ -40,7 +40,8 @@ const AnimatedView = styled(Animated.View)<PropsType['animatedView']>`
   position: absolute;
   /* bottom: ${({bottom}) => (bottom ? 0 : '-72%')}; */
   /* bottom: ${({bottom}) => (bottom ? '-79%' : '-76%')}; */
-  bottom: -76%;
+  /* bottom: -565px; */
+  bottom: ${({bottom}) => bottom};
   left: 0;
   right: 0;
   height: 105%;
