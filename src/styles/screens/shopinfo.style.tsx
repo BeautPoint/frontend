@@ -17,7 +17,7 @@ const ScrollView = styled.Pressable`
 
 const DragDownBottomSheet = styled.View<PropsType['dragBottomSheet']>`
   width: 100%;
-  height: ${({height}) => height}px;
+  height: 100%;
   position: absolute;
   /* bottom: 0;
   right: 0; */
