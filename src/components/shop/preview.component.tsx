@@ -14,7 +14,7 @@ function ShopPreview() {
           <StartIcon />
           <AppText>4.5</AppText>
         </S.RatingStars>
-        <AppText numberOfLines={1} size="22px" weight="Bold">
+        <AppText numberOfLines={1} size="20px" weight="Bold">
           {selectedShop.name}
         </AppText>
       </S.ShopName>
@@ -29,18 +29,6 @@ function ShopPreview() {
       <S.ShopAddress>
         <AppText color="#717984">{selectedShop.address}</AppText>
       </S.ShopAddress>
-      <S.BadgeBox>
-        <S.HighlightBadge>
-          <AppText color="#337EFF" weight="Bold">
-            후기많은
-          </AppText>
-        </S.HighlightBadge>
-        <S.HighlightBadge>
-          <AppText color="#337EFF" weight="Bold">
-            야간진료
-          </AppText>
-        </S.HighlightBadge>
-      </S.BadgeBox>
     </S.PreviewLayOut>
   );
 }

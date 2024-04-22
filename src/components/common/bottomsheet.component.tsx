@@ -9,11 +9,13 @@ import ShopDetailScreen from '@/screens/shop/detail.screen';
 import {useRecoilValue, useSetRecoilState} from 'recoil';
 import shopState from '@/recoil/shop/shop.recoil';
 import {useBottomSheetHook} from '@/hooks/shop/bottomsheet.hook';
+import {getBottomPositionByHeight} from '@/utils/bottomSheet.util';
 
 const {height} = Dimensions.get('screen');
 
 function BottomSheet({navigation}: NavigationProps['location']) {
   // const {panResponder, panY} = useDragAnimation();
+  const bottomValue = getBottomPositionByHeight(height);
   const dragStandardHeight = height * 0.26;
   const maxHeight = height * 0.7;
   const minHeight = height * 0.1;
@@ -93,7 +95,7 @@ function BottomSheet({navigation}: NavigationProps['location']) {
           },
         ],
       }}
-      bottom={Platform.OS === 'ios'}
+      bottom={bottomValue}
       {...panResponder.panHandlers}>
       <S.ShopInfoLayOut>
         <S.HandleSection>
