@@ -1,4 +1,8 @@
-package com.frontend;
+/*
+frontend => BeautyPoint 로변경
+*/
+
+package com.BeautyPoint;
 
 import android.os.Bundle;
 

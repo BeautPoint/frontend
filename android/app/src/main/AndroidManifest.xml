@@ -11,7 +11,7 @@
       android:theme="@style/AppTheme">
       <meta-data 
       android:name="com.google.android.geo.API_KEY" 
-      android:value="${googleMapApiKey}"
+      android:value="@string/GOOGLE_MAP_ANDROID"
       />
       <uses-library android:name="org.apache.http.legacy" android:required="false"/>     
       <activity
@@ -34,7 +34,7 @@
           
           <!-- Redirect URI: "kakao${NATIVE_APP_KEY}://oauth" -->
           <data android:host="oauth"
-                  android:scheme="kakao7d2077bf5f360e5d5747faf2d822395b" />
+                  android:scheme="@string/KAKAO_APP_KEY" />
         </intent-filter>
       </activity>
     </application>

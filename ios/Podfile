@@ -3,6 +3,10 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 # React Native Maps dependencies
 rn_maps_path = '../node_modules/react-native-maps'
+pod 'react-native-maps', path: '../node_modules/react-native-maps'
+pod 'react-native-google-maps', path: '../node_modules/react-native-maps'  # Remove this line if you don't want to support GoogleMaps on iOS
+pod 'GoogleMaps'  # Remove this line if you don't want to support GoogleMaps on iOS
+pod 'Google-Maps-iOS-Utils' # Remove this line if you don't want to support GoogleMaps on iOS
 
 platform :ios, '13.0'
 prepare_react_native_project!
