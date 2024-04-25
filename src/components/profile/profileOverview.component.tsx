@@ -7,10 +7,17 @@ import userInfoState from '@/recoil/user/user.recoil';
 import Logo from '@/assets/images/logo.png';
 import DefaultProfile from '@/assets/images/defaultProfile.png';
 import {NavigationProps} from '@/types/stackprops';
+import {useNavigationStateHook} from '@/hooks/navigation/useNavigation.hook';
 
 function ProfileOverView({navigation}: NavigationProps['profile']) {
   const {userProfile} = useRecoilValue(userInfoState);
   const {nickName, profile_image} = userProfile;
+  const {changeHeaderTitle} = useNavigationStateHook();
+
+  const handleProfileEdit = () => {
+    navigation.navigate('EditProfile');
+    changeHeaderTitle('프로필 수정');
+  };
 
   return (
     <S.UserProfileLayout>
@@ -38,7 +45,7 @@ function ProfileOverView({navigation}: NavigationProps['profile']) {
         </S.UserName>
       </S.ProfileBox>
       <S.EditButtonBox>
-        <S.EditButton>
+        <S.EditButton onPress={() => handleProfileEdit()}>
           <AppText>프로필 수정</AppText>
         </S.EditButton>
       </S.EditButtonBox>
