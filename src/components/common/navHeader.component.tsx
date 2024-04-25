@@ -4,6 +4,7 @@ import {NavigationProps} from '@/types/stackprops';
 import {useRecoilValue} from 'recoil';
 import navigationState from '@/recoil/navigation/navigation.recoil';
 import {AppText} from '@/styles/global.style';
+import {useNavigationStateHook} from '@/hooks/navigation/useNavigation.hook';
 
 function NavHeader({navigation}: NavigationProps['navigation']) {
   const {headerTitle} = useRecoilValue(navigationState);
