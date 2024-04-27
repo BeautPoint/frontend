@@ -18,6 +18,7 @@ export type RootStackParamList = {
   ShopReview: undefined;
   SettingView: undefined;
   SettingsDetail: undefined;
+  EditProfile: undefined;
 };
 
 type LoginScreenProps = StackNavigationProp<RootStackParamList, 'Login'>;
@@ -53,6 +54,11 @@ export type SettingsScreenProps = StackNavigationProp<
 export type SettingsDetailProps = StackNavigationProp<
   RootStackParamList,
   'SettingsDetail'
+>;
+
+export type EditProfileProps = StackNavigationProp<
+  RootStackParamList,
+  'EditProfile'
 >;
 
 type CommonNavigationProp = StackNavigationProp<
