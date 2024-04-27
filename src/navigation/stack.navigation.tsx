@@ -11,6 +11,7 @@ import BriefReviewScreen from '@/components/shop/review/briefReview.component';
 import DetailReviewScreen from '@/components/shop/review/detailReview.component';
 import SettingScreen from '@/components/profile/setting/settingsScreen.component';
 import SettingsDetails from '@/components/profile/setting/settingsDetail.component';
+import EditProfile from '@/components/profile/edit/editProfile.component';
 
 const Stack = createNativeStackNavigator();
 
@@ -76,6 +77,12 @@ function StackNavigation() {
       <Stack.Screen
         name="SettingsDetail"
         component={SettingsDetails}
+        options={{headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="EditProfile"
+        component={EditProfile}
         options={{headerShown: false}}
       />
 
