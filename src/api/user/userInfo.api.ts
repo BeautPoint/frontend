@@ -20,4 +20,26 @@ const getUserProfile = async () => {
   AsyncStorage.clear();
 };
 
-export {getUserProfile};
+const editUserProfile = async (imageData: any) => {
+  const acccess_token = await AsyncStorage.getItem('access_token');
+
+  const result = await UserAPI.patch('/profile', imageData, {
+    headers: {
+      Authorization: `Bearer ${acccess_token}`,
+    },
+  });
+  return result.data;
+};
+
+const updateProfilePhoto = async (imageData: any) => {
+  const acccess_token = await AsyncStorage.getItem('access_token');
+
+  const result = await UserAPI.patch('/profile/photo', imageData, {
+    headers: {
+      Authorization: `Bearer ${acccess_token}`,
+    },
+  });
+  return result.data;
+};
+
+export {getUserProfile, editUserProfile, updateProfilePhoto};
