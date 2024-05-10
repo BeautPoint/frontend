@@ -13,20 +13,15 @@ import DefaultProfile from '@/assets/images/defaultProfile.png';
 import userInfoState from '@/recoil/user/user.recoil';
 import {useRecoilValue} from 'recoil';
 import EditIcon from '@/assets/icons/pencelIcon.svg';
+import {useUserInfoHook} from '@/hooks/user/userinfo.hook';
+import ActionSheet from '@/components/common/actionSheet.component';
+import {useActionSheetHook} from '@/hooks/common/actionSheet.hooks';
 
 function EditProfile({navigation}: NavigationProps['profile']) {
-  const handleSelectImage = async () => {
-    const options: ImageLibraryOptions = {
-      mediaType: 'photo',
-      selectionLimit: 5,
-    };
-    try {
-      await launchImageLibrary(options, res => {
-        console.log(res);
-      });
-    } catch (err) {
-      console.log(err);
-    }
+  const {updateMenuList, openActionSheet} = useActionSheetHook();
+  const handleSelectImage = () => {
+    updateMenuList('image');
+    openActionSheet(true);
   };
   const defaultBirth = new Date(2001, 1, 1);
   const mokdata = [
@@ -59,6 +54,7 @@ function EditProfile({navigation}: NavigationProps['profile']) {
               }
             />
             <S.Icon>
+              <S.BoxShadow />
               <EditIcon />
             </S.Icon>
           </S.SelectImageButton>
