@@ -29,10 +29,6 @@ const AuthAPI = axios.create({
 const UserAPI = axios.create({
   //   baseURL: process.env.AUTH_API,
   baseURL: `${url}:3005/user`,
-  headers: {
-    Accept: 'application/json',
-    'content-Type': 'application/json',
-  },
 });
 
 export {PostAPI, AuthAPI, ServerApi, UserAPI};
