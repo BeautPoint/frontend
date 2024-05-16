@@ -41,9 +41,10 @@ const Icon = styled.View`
 
 const BoxShadow = styled(Shadow).attrs({
   startColor: '#848484',
-  offset: [2, 2],
+  offset: [10, 12],
 })`
   border-radius: 10px;
+  width: 6px;
 `;
 
 const EditItem = styled.View`
