@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">BeautyPoint</string>
-    <string name="kakao_app_key">@string/kakao_app_key</string>
+    <string name="kakao_app_key">@string/KAKAO_APP_KEY</string>
 </resources>
