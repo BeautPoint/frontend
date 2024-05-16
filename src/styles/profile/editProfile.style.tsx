@@ -1,3 +1,4 @@
+import {Shadow} from 'react-native-shadow-2';
 import styled from 'styled-components/native';
 
 interface PropsType {
@@ -34,9 +35,15 @@ const ProfilePhoto = styled.Image`
 
 const Icon = styled.View`
   position: absolute;
-  box-shadow: 2px 2px 1px #848484;
   right: -5px;
   bottom: -8px;
+`;
+
+const BoxShadow = styled(Shadow).attrs({
+  startColor: '#848484',
+  offset: [2, 2],
+})`
+  border-radius: 10px;
 `;
 
 const EditItem = styled.View`
@@ -88,7 +95,7 @@ const GenderButton = styled.Pressable<PropsType['gender']>`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: ${({border}) => border};
+  border: ${({border}) => border || 'none'};
 `;
 
 export {
@@ -106,4 +113,5 @@ export {
   ImageSection,
   ProfilePhoto,
   Icon,
+  BoxShadow,
 };
