@@ -4,7 +4,6 @@ const userInfoState = atom({
   key: `userInfoState/${randomString()}`,
   default: {
     userProfile: {nickName: '', profile_image: '', socialType: ''},
-    
   },
 });
 
