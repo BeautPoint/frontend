@@ -1,8 +1,8 @@
-import { randomString } from '@/utils/randomString.util';
+import {randomString} from '@/utils/randomString.util';
 import {atom} from 'recoil';
 
 const bottomSheetState = atom({
-  key: `bottomSheetState/${randomStringg()}``,
+  key: `bottomSheetState/${randomString()}`,
   default: {
     modalOpen: false,
     agreeBody: [
