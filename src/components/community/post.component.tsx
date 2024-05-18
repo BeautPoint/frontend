@@ -12,36 +12,25 @@ import {FlatList} from 'react-native';
 
 function CommunityPost({navigation}: NavigationProps['community']) {
   const {postData} = useCommunityQuery();
-  const {likeButtonHandle, detailPostData} = useCommunityPosts();
+  const {likeButtonHandle, detailPostData, handleIsDetailScreen} =
+    useCommunityPosts();
   const {likeButton} = useRecoilValue(communityState);
-  const selectedPostHandle = (
-    id: number,
-    description: string,
-    nickname: string,
-    title: string,
-    viewCount: number,
-  ) => {
-    detailPostData(id, description, nickname, title, viewCount);
+
+  const selectedPostHandle = post => {
+    detailPostData(post);
     navigation.navigate('Community');
+    handleIsDetailScreen(true);
   };
   const renderItem = ({item: post}) => {
-    const buttonisActived = likeButton === post.id ? '#619BFF' : '#9a9a9a';
+    const buttonisActived = likeButton === post.post_id ? '#619BFF' : '#9a9a9a';
     return (
-      <S.PostContainer
-        key={post.id}
-        onPress={() =>
-          selectedPostHandle(
-            post.id,
-            post.content,
-            post.nickname,
-            post.title,
-            post.viewCount,
-          )
-        }>
+      <S.PostContainer key={post.id} onPress={() => selectedPostHandle(post)}>
         <CommunityUserInfo
-          postId={post.id}
-          nickname={post.nickname}
+          postId={post.post_id}
+          nickname={post.nickName}
           viewCount={post.viewCount}
+          profileImage={post.profile_image}
+          createdAt={post.createdAt}
         />
         <S.MainBox>
           <S.PostTitle>
@@ -68,7 +57,7 @@ function CommunityPost({navigation}: NavigationProps['community']) {
           </S.TagBox>
         </S.MainBox>
         <S.BottomBox>
-          <S.ActionButton onPress={() => likeButtonHandle(post?.id)}>
+          <S.ActionButton onPress={() => likeButtonHandle(post?.post_id)}>
             <S.ButtonIcon>
               <ThumbsupIcon
                 width="30px"
