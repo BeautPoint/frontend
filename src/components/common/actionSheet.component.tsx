@@ -3,7 +3,6 @@ import actionSheetState from '@/recoil/modal/actionSheet.recoil';
 import * as S from '@/styles/common/actionSheet.style';
 import {AppText} from '@/styles/global.style';
 import {useState} from 'react';
-import {Alert} from 'react-native';
 import {useRecoilValue} from 'recoil';
 
 function ActionSheet() {
@@ -31,7 +30,7 @@ function ActionSheet() {
               borderRadius={item.id}
               marginTop={item.id}>
               <AppText
-                color={item.id === 2 ? '#FD4E44' : '#004bec'}
+                color={item.id === 2 || item.id === 9 ? '#FD4E44' : '#004bec'}
                 weight={item.id === 0 ? 'semiBold' : ''}
                 size="18px">
                 {item.title}
