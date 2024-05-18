@@ -37,7 +37,7 @@ function CommunityHeader() {
         })}
         <HeaderActionButtons />
       </S.TabBox>
-      <S.DropdownBox>
+      {/* <S.DropdownBox>
         <S.CategoryDrobdown>
           <S.DrobdownLabel>
             <AppText size="13px" weight="Bold">
@@ -57,7 +57,7 @@ function CommunityHeader() {
             <DownIcon />
           </S.DownIconBox>
         </S.SortDrobdown>
-      </S.DropdownBox>
+      </S.DropdownBox> */}
     </S.HeaderLayout>
   );
 }
