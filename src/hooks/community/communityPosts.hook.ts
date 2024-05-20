@@ -1,3 +1,5 @@
+import {getPostById, updatePost} from './../../api/community/post.api';
+import {createPost} from '@/api/community/post.api';
 import communityState from '@/recoil/community/community.recoil';
 import {useRecoilState, useRecoilValue} from 'recoil';
 
@@ -8,11 +10,21 @@ export const useCommunityPosts = () => {
    * @param id
    * 인자로 받은 id 값을 recoil로 보내어 상태관리 함
    */
-  const likeButtonHandle = (id: number) => {
-    setState(prev => ({
-      ...prev,
-      likeButton: state.likeButton === id ? '' : id,
+  const likeButtonHandle = (post_id: string) => {
+    setState(prevState => ({
+      ...prevState,
+      likeButton: prevState.likeButton === post_id ? '' : post_id,
     }));
+  };
+
+  const fetchUserPosts = async () => {
+    const data = await getPostById();
+    setState(prevState => ({
+      ...prevState,
+      userPosts: [...data],
+    }));
+
+    return;
   };
 
   const reportButtonHandle = (postId: number) => {
@@ -29,21 +41,26 @@ export const useCommunityPosts = () => {
     }));
   };
 
-  const detailPostData = (
-    id: number,
-    description: string,
-    nickname: string,
-    title: string,
-    viewCount: number,
-  ) => {
-    setState(prev => ({
+  const detailPostData = post => {
+    const {
+      post_id,
+      content,
+      nickName,
+      title,
+      viewCount,
+      createdAt,
+      profile_image,
+    } = post;
+    setState((prev: any) => ({
       ...prev,
       detailPostApi: {
-        id,
-        description,
-        nickname,
+        post_id,
+        content,
+        nickName,
         title,
         viewCount,
+        createdAt,
+        profile_image,
       },
     }));
   };
@@ -74,7 +91,7 @@ export const useCommunityPosts = () => {
 
   const postInputHandle = (
     data: string,
-    key: 'title' | 'description' | 'postCategory' | 'serviceCategory',
+    key: 'title' | 'content' | 'postCategory' | 'serviceCategory',
   ) => {
     console.log(state.selectedPostCategory);
     setState(prev => ({
@@ -86,6 +103,48 @@ export const useCommunityPosts = () => {
     }));
   };
 
+  const editTextInput = (
+    post_id: string,
+    data: string,
+    key: 'title' | 'content',
+  ) => {
+    console.log(state.editPostData);
+    setState(prevState => ({
+      ...prevState,
+      editPostData: {...prevState.editPostData, [key]: data},
+    }));
+  };
+
+  const setEditPostData = (postData: any) => {
+    return setState(prevState => ({
+      ...prevState,
+      editPostData: {
+        ...prevState.editPostData,
+        ...postData,
+      },
+    }));
+  };
+
+  const submitPost = (postData: any, type: 'create' | 'edit') => {
+    console.log('submitPost : ', postData);
+    return type === 'create' ? createPost(postData) : updatePost(postData);
+  };
+
+  const handleIsEditMode = (value: boolean) => {
+    return setState(prevState => ({
+      ...prevState,
+      isEditMode: value,
+    }));
+  };
+
+  const handleIsDetailScreen = (value: boolean) => {
+    console.log('handleIsDetailScreen : ', value);
+    setState(prevState => ({
+      ...prevState,
+      isDetailScreen: value,
+    }));
+  };
+
   return {
     likeButtonHandle,
     reportButtonHandle,
@@ -93,5 +152,11 @@ export const useCommunityPosts = () => {
     detailPostData,
     postCategoryHandle,
     postInputHandle,
+    editTextInput,
+    setEditPostData,
+    handleIsEditMode,
+    submitPost,
+    fetchUserPosts,
+    handleIsDetailScreen,
   };
 };
