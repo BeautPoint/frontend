@@ -1,19 +1,21 @@
-import {useRecoilState, useSetRecoilState} from 'recoil';
-import {useState, useEffect} from 'react';
+import {useProcessError} from './../../middleware/errorHandler';
+import {useSetRecoilState} from 'recoil';
+import {useState} from 'react';
 import {
   editUserProfile,
   getUserProfile,
   updateProfilePhoto,
 } from '@/api/user/userInfo.api';
 import userInfoState from '@/recoil/user/user.recoil';
-import {processErrorHandler} from '@/middleware/errorHandler';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {getUserLikedShops} from '@/api/like/userlikeShop.api';
+import {useAuthQuery} from '@/api/auth/auth.api';
 
 export const useUserInfoHook = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const setUserProfile = useSetRecoilState(userInfoState);
+  const {reissueToken} = useAuthQuery();
+  const {handleError} = useProcessError();
 
   const fetchUserProfile = async () => {
     setLoading(true);
@@ -31,8 +33,10 @@ export const useUserInfoHook = () => {
 
       console.log('profile : ', nickName, profile_image);
     } catch (err: any) {
-      const token = await processErrorHandler(err.response.data);
-
+      const fallback = {reissueToken: () => reissueToken()};
+      const error = {...err.response.data, fallback};
+      const token = await handleError(error);
+      console.log('token : :', token);
       if (token) {
         return await getUserProfile();
       }
@@ -47,7 +51,7 @@ export const useUserInfoHook = () => {
     try {
       const likedShops = await getUserLikedShops;
     } catch (err: any) {
-      await processErrorHandler(err.response.data);
+      await handleError(err.response.data);
     }
   };
 
