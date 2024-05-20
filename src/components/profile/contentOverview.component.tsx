@@ -1,9 +1,10 @@
 import {AppText} from '@/styles/global.style';
 import * as S from '@/styles/profile/contentOverview.style';
+import {NavigationProps} from '@/types/stackprops';
 import {useState} from 'react';
 import UserContentList from './userContentList.component';
 
-function ContentOverView() {
+function ContentOverView({navigation}: NavigationProps['profile']) {
   const tabInfo = [
     {id: 0, text: '나의 글'},
     {id: 1, text: '나의 댓글'},
@@ -27,7 +28,7 @@ function ContentOverView() {
         ))}
       </S.TabBox>
       <S.Contents>
-        <UserContentList />
+        {activeTab === 0 ? <UserContentList navigation={navigation} /> : null}
       </S.Contents>
     </S.UserContentLayout>
   );
