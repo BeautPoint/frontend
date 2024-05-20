@@ -5,16 +5,10 @@ import {NavigationProps} from '@/types/stackprops';
 import DatePicker from 'react-native-date-picker';
 import DownIcon from '@/assets/icons/downIcon.svg';
 import {useState} from 'react';
-import {
-  launchImageLibrary,
-  ImageLibraryOptions,
-} from 'react-native-image-picker';
 import DefaultProfile from '@/assets/images/defaultProfile.png';
 import userInfoState from '@/recoil/user/user.recoil';
 import {useRecoilValue} from 'recoil';
 import EditIcon from '@/assets/icons/pencelIcon.svg';
-import {useUserInfoHook} from '@/hooks/user/userinfo.hook';
-import ActionSheet from '@/components/common/actionSheet.component';
 import {useActionSheetHook} from '@/hooks/common/actionSheet.hooks';
 
 function EditProfile({navigation}: NavigationProps['profile']) {
@@ -63,7 +57,7 @@ function EditProfile({navigation}: NavigationProps['profile']) {
           <S.Label>
             <AppText>닉네임</AppText>
           </S.Label>
-          <S.TextInput defaultValue="닉네임입니다" />
+          <S.TextInput defaultValue={userProfile?.nickName} />
         </S.EditItem>
         <S.EditItem>
           <S.Label>
