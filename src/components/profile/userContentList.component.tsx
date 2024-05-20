@@ -1,73 +1,50 @@
+import {useCommunityPosts} from '@/hooks/community/communityPosts.hook';
+import communityState from '@/recoil/community/community.recoil';
 import {AppText} from '@/styles/global.style';
 import * as S from '@/styles/profile/userContent.style';
+import {NavigationProps} from '@/types/stackprops';
+import {dateCalculator} from '@/utils/dateCalculator.util';
+import {useRecoilValue} from 'recoil';
 
-function UserContentList() {
+function UserContentList({navigation}: NavigationProps['profile']) {
+  const {userPosts} = useRecoilValue(communityState);
+  const {detailPostData, handleIsDetailScreen, setEditPostData} =
+    useCommunityPosts();
+
+  const handlePressedPost = (post: any) => {
+    const postData = {
+      post_id: post.post_id,
+      title: post.title,
+      content: post.content,
+    };
+    handleIsDetailScreen(true);
+    detailPostData(post);
+    setEditPostData(postData);
+    navigation.navigate('Community');
+  };
   return (
     <S.UserContnetLayout>
-      <S.ContnetBox>
-        <S.Title>
-          <AppText>Title</AppText>
-        </S.Title>
-        <S.Description>
-          <AppText numberOfLines={2} size="13px">
-            자연스럽게 하는 곳 아시는 분 있나요? 아시는 분 있으면
-            소개부탁드릴게요 서울/경기 지역 입니다:)
-          </AppText>
-        </S.Description>
-        <S.CreatedDate>
-          <AppText size="12px" color="#9ea2a7">
-            2023.10.10
-          </AppText>
-        </S.CreatedDate>
-      </S.ContnetBox>
-      <S.ContnetBox>
-        <S.Title>
-          <AppText>Title</AppText>
-        </S.Title>
-        <S.Description>
-          <AppText numberOfLines={2} size="13px">
-            자연스럽게 하는 곳 아시는 분 있나요? 아시는 분 있으면
-            소개부탁드릴게요 서울/경기 지역 입니다:)
-          </AppText>
-        </S.Description>
-        <S.CreatedDate>
-          <AppText size="12px" color="#9ea2a7">
-            2023.10.10
-          </AppText>
-        </S.CreatedDate>
-      </S.ContnetBox>
-      <S.ContnetBox>
-        <S.Title>
-          <AppText>Title</AppText>
-        </S.Title>
-        <S.Description>
-          <AppText numberOfLines={2} size="13px">
-            자연스럽게 하는 곳 아시는 분 있나요? 아시는 분 있으면
-            소개부탁드릴게요 서울/경기 지역 입니다:)
-          </AppText>
-        </S.Description>
-        <S.CreatedDate>
-          <AppText size="12px" color="#9ea2a7">
-            2023.10.10
-          </AppText>
-        </S.CreatedDate>
-      </S.ContnetBox>
-      <S.ContnetBox>
-        <S.Title>
-          <AppText>Title</AppText>
-        </S.Title>
-        <S.Description>
-          <AppText numberOfLines={2} size="13px">
-            자연스럽게 하는 곳 아시는 분 있나요? 아시는 분 있으면
-            소개부탁드릴게요 서울/경기 지역 입니다:)
-          </AppText>
-        </S.Description>
-        <S.CreatedDate>
-          <AppText size="12px" color="#9ea2a7">
-            2023.10.10
-          </AppText>
-        </S.CreatedDate>
-      </S.ContnetBox>
+      {userPosts.map(item => {
+        const date = new Date(item.createdAt);
+        const formattedDate = dateCalculator(date);
+        return (
+          <S.ContnetBox onPress={() => handlePressedPost(item)}>
+            <S.Title>
+              <AppText>{item.title}</AppText>
+            </S.Title>
+            <S.Description>
+              <AppText numberOfLines={2} size="13px">
+                {item.content}
+              </AppText>
+            </S.Description>
+            <S.CreatedDate>
+              <AppText size="12px" color="#9ea2a7">
+                {formattedDate}
+              </AppText>
+            </S.CreatedDate>
+          </S.ContnetBox>
+        );
+      })}
     </S.UserContnetLayout>
   );
 }
