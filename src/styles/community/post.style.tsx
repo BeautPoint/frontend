@@ -4,7 +4,7 @@ const PostLayout = styled.View`
   width: 100%;
   /* border-bottom-width: 1px;
   border-bottom-color: #bdbdbd; */
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 `;
 
 const PostContainer = styled.Pressable`
