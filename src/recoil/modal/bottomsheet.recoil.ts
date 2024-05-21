@@ -4,7 +4,7 @@ import {atom} from 'recoil';
 const bottomSheetState = atom({
   key: `bottomSheetState/${randomString()}`,
   default: {
-    modalOpen: false,
+    isOpen: false,
     agreeBody: [
       {id: 0, text: '(필수) 만 14세 이상입니다.', isChecked: false},
       {id: 1, text: '(필수) 서비스 이용약관 동의', isChecked: false},
