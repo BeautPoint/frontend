@@ -1,6 +1,8 @@
 import styled from 'styled-components/native';
 
-const CommentsLayout = styled.View``;
+const CommentsLayout = styled.View`
+  height: 40%;
+`;
 
 const Header = styled.View`
   display: flex;
@@ -18,7 +20,7 @@ const Count = styled.View``;
 const CommentsDetailBox = styled.ScrollView`
   background: #ffffff;
   padding: 20px;
-  min-height: 300px;
+  /* min-height: 100px; */
 `;
 
 const UserProfile = styled.View`
