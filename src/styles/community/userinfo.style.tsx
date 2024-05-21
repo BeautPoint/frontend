@@ -12,8 +12,7 @@ const InfoBox = styled.View`
   padding: 5px 10px;
 `;
 
-const ProfileImage = styled.View`
-  background: #bebebe;
+const ProfilePhoto = styled.Image`
   width: 50px;
   height: 50px;
   border-radius: 50px;
@@ -36,7 +35,7 @@ const CreatedAt = styled.View`
 `;
 const Views = styled.View``;
 
-const ReportButton = styled.Pressable`
+const EditPostButton = styled.Pressable`
   width: 20px;
   display: flex;
   align-items: center;
@@ -54,11 +53,11 @@ const ReportDropdown = styled.View`
 export {
   UserInfoLayout,
   InfoBox,
-  ProfileImage,
+  ProfilePhoto,
   PostStats,
   UserName,
   CreatedAt,
   Views,
-  ReportButton,
+  EditPostButton,
   ReportDropdown,
 };
