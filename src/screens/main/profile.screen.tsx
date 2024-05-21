@@ -6,13 +6,16 @@ import {useUserInfoHook} from '@/hooks/user/userinfo.hook';
 import {useFocusEffect} from '@react-navigation/native';
 import {useCallback} from 'react';
 import SettingsDetails from '@/components/profile/setting/settingsDetail.component';
+import {useCommunityPosts} from '@/hooks/community/communityPosts.hook';
 
 function ProfileScreen({navigation}: NavigationProps['profile']) {
   const {fetchUserProfile} = useUserInfoHook();
+  const {fetchUserPosts} = useCommunityPosts();
   useFocusEffect(
     useCallback(() => {
       fetchUserProfile();
-      return () => {};
+      fetchUserPosts();
+      return;
     }, []),
   );
 
@@ -21,7 +24,7 @@ function ProfileScreen({navigation}: NavigationProps['profile']) {
   return (
     <S.ProfileLayOut>
       <ProfileOverView navigation={navigation} />
-      <ContentOverView />
+      <ContentOverView navigation={navigation} />
       {showScreen && <SettingsDetails navigation={navigation} />}
     </S.ProfileLayOut>
   );
