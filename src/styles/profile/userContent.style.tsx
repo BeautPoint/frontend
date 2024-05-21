@@ -6,7 +6,7 @@ const UserContnetLayout = styled.ScrollView`
   display: flex;
 `;
 
-const ContnetBox = styled.View`
+const ContnetBox = styled.Pressable`
   width: 100%;
   border-bottom-width: 1px;
   border-bottom-color: #e9eaec;
