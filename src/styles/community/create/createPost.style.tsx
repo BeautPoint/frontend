@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 interface PropType {
-  categoryButton: {borderColor: boolean; marginRight?: string};
+  categoryButton: {borderColor?: boolean; marginRight?: string};
   buttonBox: {length: number};
   input: {platformMargin?: string};
 }
