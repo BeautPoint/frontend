@@ -1,3 +1,4 @@
+import bottomSheetState from '@/recoil/modal/bottomsheet.recoil';
 import shopState from '@/recoil/shop/shop.recoil';
 import {MutableRefObject} from 'react';
 import {Animated, PanResponder} from 'react-native';
@@ -12,6 +13,7 @@ interface DragHandleParams {
 export const useBottomSheetHook = () => {
   const setShopInfo = useSetRecoilState(shopState);
   const shopInfo = useRecoilValue(shopState);
+  const setBottomSheet = useSetRecoilState(bottomSheetState);
 
   console.log('gobackButton : ' + shopInfo.isButtonPressed);
   const previewHandle = (pram: boolean) => {
@@ -82,5 +84,12 @@ export const useBottomSheetHook = () => {
     return panResponder;
   };
 
-  return {dragHandle, goBackButtonHandle};
+  const openBottomSheet = (isOpen: boolean) => {
+    setBottomSheet(prevState => ({
+      ...prevState,
+      isOpen,
+    }));
+  };
+
+  return {dragHandle, goBackButtonHandle, openBottomSheet};
 };
