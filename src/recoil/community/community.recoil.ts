@@ -2,7 +2,7 @@ import {randomString} from '@/utils/randomString.util';
 import {atom} from 'recoil';
 
 const communityState = atom({
-  key: `communityState//${randomString()}`,
+  key: `communityState/${randomString()}`,
   default: {
     tabSelector: [
       {id: 0, name: '전체보기'},
@@ -10,15 +10,19 @@ const communityState = atom({
       {id: 2, name: '정보'},
       {id: 3, name: '입소문'},
     ],
+    isEditMode: false,
+    isDetailScreen: false,
     selectedTab: '전체보기',
     likeButton: '' as string | number,
     showReportDropdown: null as number | null,
     detailPostApi: {
-      id: 0,
-      description: '',
-      nickname: '',
+      post_id: '',
+      content: '',
       title: '',
       viewCount: 0,
+      nickName: '',
+      profile_image: '',
+      createdAt: Date,
     },
     postCategoies: [
       {id: 0, postCategory: '정보'},
@@ -38,10 +42,27 @@ const communityState = atom({
     selectedPostCategory: {postCategory: [], serviceCategory: []},
     createPostData: {
       title: '',
-      description: '',
+      content: '',
       postCategory: [],
       serviceCategory: [],
     },
+    editPostData: {
+      post_id: '',
+      title: '',
+      content: '',
+    },
+    userPosts: [
+      {
+        post_id: '',
+        category_id: null,
+        title: '',
+        content: '',
+        views: null,
+        createdAt: '',
+        nickName: '',
+        profile_image: null,
+      },
+    ],
   },
 });
 
