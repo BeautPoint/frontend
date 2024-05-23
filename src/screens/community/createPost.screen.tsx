@@ -6,6 +6,7 @@ import {useRecoilValue} from 'recoil';
 import communityState from '@/recoil/community/community.recoil';
 import {useCommunityPosts} from '@/hooks/community/communityPosts.hook';
 import {Platform} from 'react-native';
+import {useState} from 'react';
 
 function CreatePostScreen({navigation}: NavigationProps['community']) {
   const {
@@ -13,21 +14,38 @@ function CreatePostScreen({navigation}: NavigationProps['community']) {
     serviceCategoies,
     selectedPostCategory,
     createPostData,
+    detailPostApi,
+    isEditMode,
+    editPostData,
   } = useRecoilValue(communityState);
-  const {postCategoryHandle, postInputHandle} = useCommunityPosts();
-  const borderActived = (
-    category: string,
-    key: 'postCategory' | 'serviceCategory',
-  ) => {
-    // return selectedPostCategory[key].some(item => item === category);
+  const {
+    postCategoryHandle,
+    postInputHandle,
+    editTextInput,
+    submitPost,
+    handleIsEditMode,
+  } = useCommunityPosts();
+
+  const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
+  const postData = isEditMode ? editPostData : createPostData;
+  console.log('postData :', postData);
+  const handleSubmit = () => {
+    const type = isEditMode ? 'edit' : 'create';
+    submitPost(postData, type);
+    navigation.goBack();
+    handleIsEditMode(false);
   };
 
-  const activedSubmitButton = () => {
-    const values = Object.values(createPostData);
-    return values.every(value => value !== '');
+  const handleTextChange = (text: string, type: 'title' | 'content') => {
+    isEditMode
+      ? editTextInput(detailPostApi.post_id, text, type)
+      : postInputHandle(text, type);
+    const postData = isEditMode ? editPostData : createPostData;
+    const {title, content} = postData;
+    const isEnabled = title !== '' && content !== '';
+    setIsSubmitEnabled(isEnabled);
   };
 
-  console.log(selectedPostCategory);
   return (
     <S.CreatePostLayout>
       <S.ScreenHeader>
@@ -35,8 +53,10 @@ function CreatePostScreen({navigation}: NavigationProps['community']) {
           <BackIcnon />
         </S.BackButton>
         <AppText>글쓰기</AppText>
-        <S.SubmitButton>
-          <AppText color="#8C939C">완료</AppText>
+        <S.SubmitButton onPress={handleSubmit} disabled={!isSubmitEnabled}>
+          <AppText color={isSubmitEnabled ? '#000000' : '#8C939C'}>
+            완료
+          </AppText>
         </S.SubmitButton>
       </S.ScreenHeader>
       <S.Categories>
@@ -50,7 +70,6 @@ function CreatePostScreen({navigation}: NavigationProps['community']) {
               onPress={() =>
                 postCategoryHandle(category.postCategory, 'postCategory')
               }
-              borderColor={borderActived(category.postCategory, 'postCategory')}
               key={category.id}>
               <AppText size="12px" color="#5A6068">
                 {category.postCategory}
@@ -69,10 +88,6 @@ function CreatePostScreen({navigation}: NavigationProps['community']) {
               onPress={() =>
                 postCategoryHandle(category.serviceCategory, 'serviceCategory')
               }
-              borderColor={borderActived(
-                category.serviceCategory,
-                'serviceCategory',
-              )}
               key={category.id}>
               <AppText size="12px" color="#5A6068">
                 {category.serviceCategory}
@@ -85,13 +100,15 @@ function CreatePostScreen({navigation}: NavigationProps['community']) {
         <S.PostTitleInput
           platformMargin={Platform.OS}
           placeholder="제목을 입력해주세요"
-          onChangeText={text => postInputHandle(text, 'title')}
+          onChangeText={(text: string) => handleTextChange(text, 'title')}
+          defaultValue={detailPostApi?.title}
         />
         <S.TextForm
           placeholder="본문을 입력해주세요."
           textAlignVertical="top"
           multiline={true}
-          onChangeText={text => postInputHandle(text, 'description')}
+          onChangeText={(text: string) => handleTextChange(text, 'content')}
+          defaultValue={detailPostApi?.content}
         />
       </S.PostBodyEditor>
     </S.CreatePostLayout>
