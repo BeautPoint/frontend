@@ -25,4 +25,3 @@
 </br>
 
 <img src="https://github.com/BeautPoint/frontend/assets/87120463/2d85ed52-145c-410b-aadd-c43609ef0fe1"/>
-
