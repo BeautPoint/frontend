@@ -10,6 +10,7 @@ import {useRecoilValue, useSetRecoilState} from 'recoil';
 import shopState from '@/recoil/shop/shop.recoil';
 import {useBottomSheetHook} from '@/hooks/shop/bottomsheet.hook';
 import {getBottomPositionByHeight} from '@/utils/bottomSheet.util';
+import bottomSheetState from '@/recoil/modal/bottomsheet.recoil';
 
 const {height} = Dimensions.get('screen');
 
@@ -23,9 +24,9 @@ function BottomSheet({navigation}: NavigationProps['location']) {
   const minimumTranslateY = 0;
 
   const {previewFullScreen, isButtonPressed} = useRecoilValue(shopState);
+  const {isOpen} = useRecoilValue(bottomSheetState);
   const {dragHandle} = useBottomSheetHook();
   const setShopInfo = useSetRecoilState(shopState);
-
   const translationY = React.useRef(0);
   const panY = React.useRef(new Animated.Value(0)).current;
   const panResponder = dragHandle({
@@ -84,6 +85,7 @@ function BottomSheet({navigation}: NavigationProps['location']) {
 
   return (
     <S.AnimatedView
+      display={isOpen}
       style={{
         transform: [
           {
