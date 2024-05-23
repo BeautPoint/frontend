@@ -43,5 +43,5 @@ export const useHomeScreenHooks = () => {
     }));
   };
 
-  return {shopLikeHandle, handleHomeScreenNavReset,testHandle};
+  return {shopLikeHandle, handleHomeScreenNavReset, testHandle};
 };
