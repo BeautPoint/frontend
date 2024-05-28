@@ -45,8 +45,10 @@ export const useAuthQuery = () => {
 
   const signupApi = async (signupUserData: any) => {
     try {
-      console.log('유저데이터2 : ', signupUserData);
-      await AuthAPI.post('/signup', signupUserData);
+      const response = await AuthAPI.post('/signup', signupUserData);
+      const {access_token, refresh_token} = response.data;
+      await AsyncStorage.setItem('access_token', access_token);
+      await AsyncStorage.setItem('refresh_token', refresh_token);
     } catch (err) {
       return err;
     }
