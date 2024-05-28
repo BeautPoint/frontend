@@ -61,7 +61,6 @@ export const useAuthQuery = () => {
       const {access_token, refresh_token} = response.data;
       await AsyncStorage.setItem('access_token', access_token);
       await AsyncStorage.setItem('refresh_token', refresh_token);
-      //AsyncStorage.clear();
       return true;
     } catch (err: any) {
       const fallback = {removeToken: () => removeToken()};
