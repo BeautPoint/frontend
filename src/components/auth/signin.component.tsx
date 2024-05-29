@@ -14,7 +14,7 @@ function SignIn({navigation}: NavigationProps['signup']) {
   const {logout} = useNaverOauth();
   const {singupScreen, resetToHomeScreen} = useRecoilValue(navigationState);
   console.log(singupScreen);
-  singupScreen ? navigation.navigate('SignUp') : null;
+  singupScreen ? navigation.navigate('Signup') : null;
   resetToHomeScreen ? navigation.reset({routes: [{name: 'Home'}]}) : null;
   return (
     <S.SignInLayOut>
