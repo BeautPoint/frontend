@@ -8,19 +8,40 @@ import {useCommunityPosts} from '@/hooks/community/communityPosts.hook';
 import {useRecoilValue} from 'recoil';
 import communityState from '@/recoil/community/community.recoil';
 import {NavigationProps} from '@/types/stackprops';
-import {FlatList} from 'react-native';
+import {FlatList, RefreshControl} from 'react-native';
+import {useCallback, useState} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
 
 function CommunityPost({navigation}: NavigationProps['community']) {
-  const {postData} = useCommunityQuery();
-  const {likeButtonHandle, detailPostData, handleIsDetailScreen} =
-    useCommunityPosts();
-  const {likeButton} = useRecoilValue(communityState);
+  const {postData, getPost} = useCommunityQuery();
+  const {
+    likeButtonHandle,
+    detailPostData,
+    handleIsDetailScreen,
+    handleRefreshing,
+  } = useCommunityPosts();
+  const {likeButton, refreshing} = useRecoilValue(communityState);
 
   const selectedPostHandle = post => {
     detailPostData(post);
     navigation.navigate('Community');
     handleIsDetailScreen(true);
   };
+
+  const onRefresh = useCallback(() => {
+    handleRefreshing(true);
+    setTimeout(() => {
+      getPost();
+      handleRefreshing(false);
+    }, 2000);
+  }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      getPost();
+    }, []),
+  );
+
   const renderItem = ({item: post}) => {
     const buttonisActived = likeButton === post.post_id ? '#619BFF' : '#9a9a9a';
     return (
@@ -81,7 +102,13 @@ function CommunityPost({navigation}: NavigationProps['community']) {
 
   return (
     <S.PostLayout>
-      <FlatList data={postData} renderItem={renderItem} />
+      <FlatList
+        data={postData}
+        renderItem={renderItem}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      />
     </S.PostLayout>
   );
 }
