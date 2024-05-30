@@ -80,21 +80,22 @@ export const useOauthHook = () => {
 export const useGoogleOauth = () => {
   const [userInfo, setUserInfo] = useState<{}>({});
   const {loginApi} = useAuthQuery();
-
   const onPressGoogleBtn = async () => {
     try {
       await GoogleSignin.hasPlayServices();
-      const {user} = await GoogleSignin.signIn();
-      const {email, name, photo} = user;
-      setUserInfo({email, name, photo});
+      const {accessToken} = await GoogleSignin.getTokens();
+      const loginData = {accessToken, type: 'google'};
+      const response = await loginApi(loginData);
+      return;
     } catch (err: any) {
+      console.log('google err : ', err.code);
       Alert.alert('로그인에 실패 하였습니다.');
     }
   };
 
-  useEffect(() => {
-    GoogleSignin.configure();
-  }, []);
+  // useEffect(() => {
+  //   GoogleSignin.configure();
+  // }, []);
 
   return {onPressGoogleBtn, userInfo};
 };
@@ -109,9 +110,9 @@ export const useKakaoOauth = () => {
       const loginData = {accessToken, type: 'kakao'};
       const response = await loginApi(loginData);
       console.log(response);
-
-      const {email, nickname, profileImageUrl} = await getProfile();
-      setUserInfo({email, nickname, profileImageUrl});
+      return;
+      // const {email, nickname, profileImageUrl} = await getProfile();
+      // setUserInfo({email, nickname, profileImageUrl});
     } catch (err: any) {
       console.log(err);
       Alert.alert('로그인에 실패 하였습니다.');
@@ -123,7 +124,7 @@ export const useKakaoOauth = () => {
 
 export const useNaverOauth = () => {
   const [userInfo, setUserInfo] = useState<{}>({});
-
+  const {loginApi} = useAuthQuery();
   const consumerKey = Config.NAVER_APP_KEY!;
   const consumerSecret = Config.NAVER_SECRET!;
   const appName = Config.APP_NAME!;
@@ -146,14 +147,18 @@ export const useNaverOauth = () => {
         consumerSecret,
         serviceUrlScheme,
       });
+      console.log('successResponse : ', successResponse);
+      const accessToken = successResponse?.accessToken;
+      const loginData = {accessToken, type: 'naver'};
+      const response = await loginApi(loginData);
+      console.log('naver : ', response);
 
-      const {response} = await NaverLogin.getProfile(
-        successResponse!.accessToken,
-      );
-      console.log(response);
+      // const {response} = await NaverLogin.getProfile(
+      //   successResponse!.accessToken,
+      // );
 
-      const {email, id, nickname, profile_image} = response;
-      setUserInfo({email, id, nickname, profile_image});
+      // const {email, id, nickname, profile_image} = response;
+      // setUserInfo({email, id, nickname, profile_image});
     } catch (err) {
       console.log(err);
       Alert.alert('로그인에 실패했습니다.');
