@@ -12,6 +12,7 @@ import DetailReviewScreen from '@/components/shop/review/detailReview.component'
 import SettingScreen from '@/components/profile/setting/settingsScreen.component';
 import SettingsDetails from '@/components/profile/setting/settingsDetail.component';
 import EditProfile from '@/components/profile/edit/editProfile.component';
+import CommunityScreen from '@/screens/main/community.screen';
 
 const Stack = createNativeStackNavigator();
 
@@ -29,7 +30,7 @@ function StackNavigation() {
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="SignUp"
+        name="Signup"
         component={SignupScreen}
         options={{headerShown: false}}
       />
@@ -46,6 +47,11 @@ function StackNavigation() {
       <Stack.Screen
         name="Community"
         component={CommunityPostDetail}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="CommunityHome"
+        component={CommunityScreen}
         options={{headerShown: false}}
       />
       <Stack.Screen
