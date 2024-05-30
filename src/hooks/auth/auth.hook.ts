@@ -1,10 +1,11 @@
 import {NavigationProps} from './../../types/stackprops';
-import {useRecoilState} from 'recoil';
+import {useRecoilState, useSetRecoilState} from 'recoil';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useState, useEffect} from 'react';
 import loginState from '@/recoil/auth/loginInfo.recoil';
 import {useHomeScreenHooks} from '../home/home.hook';
 import {useNavigation} from '@react-navigation/native';
+import signupState from '@/recoil/auth/signupInfoForm.recoil';
 
 export const useAuthHook = () => {
   const navigation = useNavigation();
@@ -38,5 +39,5 @@ export const useAuthHook = () => {
     }));
   };
 
-  return {accessToken, removeToken, handleLoginModal};
+  return {accessToken, setAccessToken, removeToken, handleLoginModal};
 };
