@@ -7,7 +7,7 @@ import {useUserInfoHook} from '../user/userinfo.hook';
 export const useActionSheetHook = () => {
   const setActionSheet = useSetRecoilState(actionSheetState);
   const {changeProfilePhoto, changeDefaultprofilePhoto} = useUserInfoHook();
-  const {handleIsEditMode} = useCommunityPosts();
+  const {handleIsEditMode, handleDeletePost} = useCommunityPosts();
   const handleMenuSelection = (id: number | null) => {
     return setActionSheet(prevState => ({
       ...prevState,
@@ -61,7 +61,7 @@ export const useActionSheetHook = () => {
         {
           id: 2,
           title: '게시물 삭제하기',
-          pressEvent: () => console.log('삭제'),
+          pressEvent: () => handleDeletePost(),
         },
         {id: 0, title: '취소', pressEvent: null},
       ];
