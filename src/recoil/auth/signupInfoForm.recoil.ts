@@ -35,6 +35,7 @@ const signupState = atom({
     selectedServices: [] as {id: number; description: string}[],
     selectedRequirement: [] as {id: number; description: string}[],
     nextButtonActive: false,
+    resetToSingupScreen: false,
   },
 });
 
