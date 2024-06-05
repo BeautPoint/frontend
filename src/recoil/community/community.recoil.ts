@@ -63,6 +63,7 @@ const communityState = atom({
         profile_image: null,
       },
     ],
+    refreshing: false,
   },
 });
 
