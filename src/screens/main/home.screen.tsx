@@ -12,7 +12,6 @@ function HomeScreen({navigation}: NavigationProps['home']) {
   const [state, setState] = useRecoilState(navigationState);
   const {handleHomeScreenNavReset} = useHomeScreenHooks();
   handleHomeScreenNavReset(false);
-  console.log('resetToHomeScreen : ', state.resetToHomeScreen);
   return (
     <S.HomeLayOut>
       <HomeHeader navigation={navigation} />
