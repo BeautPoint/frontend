@@ -7,7 +7,7 @@ export type RootStackParamList = {
   Confirm: undefined;
   Search: undefined;
   ShopDetails: undefined;
-  SignUp: undefined;
+  Signup: undefined;
   Location: undefined;
   Community: undefined;
   HomeSearch: undefined;
@@ -23,7 +23,7 @@ export type RootStackParamList = {
 
 type LoginScreenProps = StackNavigationProp<RootStackParamList, 'Login'>;
 type HomeScreenProps = StackNavigationProp<RootStackParamList, 'HomeSearch'>;
-type SignUpScreenProps = StackNavigationProp<RootStackParamList, 'SignUp'>;
+type SignUpScreenProps = StackNavigationProp<RootStackParamList, 'Signup'>;
 type ConfirmModalProps = StackNavigationProp<RootStackParamList, 'Confirm'>;
 type LocationScreenProps = StackNavigationProp<
   RootStackParamList,
