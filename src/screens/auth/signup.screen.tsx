@@ -14,20 +14,16 @@ import navigationState from '@/recoil/navigation/navigation.recoil';
 
 function SignupScreen({navigation}: NavigationProps['signup']) {
   const {width} = Dimensions.get('screen');
-  const [step, setStep] = useState(1);
   const sigupform = useRecoilValue(signupState);
-  const navState = useRecoilValue(navigationState);
+  const {singupScreen} = useRecoilValue(navigationState);
   const userInfoForm = useSetRecoilState(signupState);
   const {infoCollectionHandle, handleSubmit} = useSignupUserInfo();
+  !singupScreen && navigation.goBack();
 
   const NextButtonHandle = () => {
-    // step < 3 ? setStep(step + 1) : navigation.reset({routes: [{name: 'Home'}]});
     const stepNumber = sigupform.progressStep;
     infoCollectionHandle(stepNumber);
     handleSubmit();
-    if (navState.resetToHomeScreen) {
-      navigation.reset({routes: [{name: 'Home'}]});
-    }
   };
 
   const BackButtonHandle = () => {
