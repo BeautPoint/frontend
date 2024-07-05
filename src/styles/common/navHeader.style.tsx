@@ -1,9 +1,13 @@
 import styled from 'styled-components/native';
 
-const HeaderLayout = styled.View`
+interface PropsType {
+  layout: {borderBottom?: string | number};
+}
+
+const HeaderLayout = styled.View<PropsType['layout']>`
   width: 100%;
   height: 50px;
-  border-bottom-width: 1px;
+  border-bottom-width: ${({borderBottom}) => (borderBottom ? '1px' : '0px')};
   border-bottom-color: #ebebeb;
 `;
 

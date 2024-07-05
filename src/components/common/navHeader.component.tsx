@@ -6,10 +6,16 @@ import navigationState from '@/recoil/navigation/navigation.recoil';
 import {AppText} from '@/styles/global.style';
 import {useNavigationStateHook} from '@/hooks/navigation/useNavigation.hook';
 
-function NavHeader({navigation}: NavigationProps['navigation']) {
+interface NavHeaderProps {
+  navigation: NavigationProps['navigation']['navigation'];
+  borderBottom?: string | number;
+}
+
+function NavHeader({navigation, borderBottom}: NavHeaderProps) {
   const {headerTitle} = useRecoilValue(navigationState);
+
   return (
-    <S.HeaderLayout>
+    <S.HeaderLayout borderBottom={borderBottom}>
       <S.MainContent>
         <S.BackButton onPress={() => navigation.goBack()}>
           <BackIcon />
