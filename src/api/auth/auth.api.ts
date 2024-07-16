@@ -20,7 +20,7 @@ export const useAuthQuery = () => {
       const data = await AuthAPI.post('/login', loginData);
       setPostData(data.data);
       const {access_token, refresh_token} = data.data;
-      console.log(data.data);
+      console.log('서버 로그인 응답 : ', data.data);
 
       await AsyncStorage.setItem('access_token', access_token);
       await AsyncStorage.setItem('refresh_token', refresh_token);
@@ -57,7 +57,9 @@ export const useAuthQuery = () => {
   const reissueToken = async () => {
     try {
       const refreshToken = await AsyncStorage.getItem('refresh_token');
+      console.log('refreshToken : ', refreshToken);
       const response = await AuthAPI.post('/reissuetoken', {refreshToken});
+
       const {access_token, refresh_token} = response.data;
       await AsyncStorage.setItem('access_token', access_token);
       await AsyncStorage.setItem('refresh_token', refresh_token);
@@ -67,8 +69,49 @@ export const useAuthQuery = () => {
       const error = {...err.response.data, fallback};
       await handleError(error);
       console.log('reissue : ', err.response.data);
+      return err;
     }
   };
 
+  // const adminLogin = async () => {
+  //   const data = await AuthAPI.post('/login', loginData);
+  // };
+
   return {loginApi, postData, signupApi, reissueToken};
+};
+
+export const reissueToken = async () => {
+  try {
+    const refreshToken = await AsyncStorage.getItem('refresh_token');
+    console.log('refreshToken : ', refreshToken);
+    const response = await AuthAPI.post('/reissuetoken', {refreshToken});
+
+    const {access_token, refresh_token} = response.data;
+    await AsyncStorage.setItem('access_token', access_token);
+    await AsyncStorage.setItem('refresh_token', refresh_token);
+    return true;
+  } catch (err: any) {
+    console.log('reissue : ', err.response.data);
+    return err;
+  }
+};
+
+export const checkTokenValidity = async () => {
+  const acccess_token = await AsyncStorage.getItem('access_token');
+  try {
+    const token = await AsyncStorage.getItem('access_token');
+    const response = await AuthAPI.post(
+      '/decodetoken',
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${acccess_token}`,
+        },
+      },
+    );
+    return response.data; // 유효하면 true 반환
+  } catch (err) {
+    console.log('토큰 유효성 검사 실패:', err);
+    return false; // 실패하면 false 반환
+  }
 };
