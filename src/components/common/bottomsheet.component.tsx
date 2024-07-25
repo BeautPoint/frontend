@@ -35,54 +35,6 @@ function BottomSheet({navigation}: NavigationProps['location']) {
     panY,
   });
 
-  // const panResponder = dragHandle({
-  //   height,
-  //   translationY,
-  //   panY,
-  // });
-
-  // const previewHandle = (pram: boolean) => {
-  //   setShopInfo(prev => ({
-  //     ...prev,
-  //     previewFullScreen: pram,
-  //   }));
-  // };
-
-  // const panResponder = PanResponder.create({
-  //   onStartShouldSetPanResponder: () => true,
-
-  //   onPanResponderGrant: () => {
-  //     panY.setOffset(translationY.current);
-  //   },
-  //   onPanResponderMove: (evt, gesture) => {
-  //     panY.setValue(gesture.dy);
-  //     console.log(-dragStandardHeight);
-  //   },
-  //   onPanResponderRelease: (evt, gesture) => {
-  //     panY.flattenOffset();
-  //     console.log(gesture.dy > -dragStandardHeight);
-  //     console.log('ㅎㄷㄴㅅ : ' + -dragStandardHeight);
-
-  //     if (gesture.dy > dragStandardHeight) {
-  //       springAnimation('down');
-  //       previewHandle(false);
-  //     } else {
-  //       springAnimation('up');
-  //       previewHandle(true);
-  //     }
-  //   },
-  // });
-
-  // const springAnimation = (direction: 'up' | 'down') => {
-  //   console.log('direction', direction);
-  //   translationY.current =
-  //     direction === 'down' ? minimumTranslateY : maximumTranslateY;
-  //   Animated.spring(panY, {
-  //     toValue: translationY.current,
-  //     useNativeDriver: true,
-  //   }).start();
-  // };
-
   return (
     <S.AnimatedView
       display={isOpen}
