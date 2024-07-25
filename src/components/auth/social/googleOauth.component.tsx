@@ -6,12 +6,14 @@ import {NavigationProps} from '@/types/stackprops';
 function GoogleOauthButton(navigation: NavigationProps['signup']) {
   const {onPressGoogleBtn} = useGoogleOauth();
   return (
-    <S.AouthButtonLayOut background="" onPress={() => onPressGoogleBtn()}>
-      <S.ButtonIcon>
-        <GoogleIcon />
-      </S.ButtonIcon>
-      <S.ButtonText color="black"> Google로 로그인</S.ButtonText>
-    </S.AouthButtonLayOut>
+    <S.BoxShadow>
+      <S.AouthButtonLayOut background="" onPress={() => onPressGoogleBtn()}>
+        <S.ButtonIcon>
+          <GoogleIcon />
+        </S.ButtonIcon>
+        <S.ButtonText color="black"> Google로 로그인</S.ButtonText>
+      </S.AouthButtonLayOut>
+    </S.BoxShadow>
   );
 }
 
