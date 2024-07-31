@@ -4,7 +4,6 @@ import {NavigationProps} from '@/types/stackprops';
 import {useRecoilValue} from 'recoil';
 import navigationState from '@/recoil/navigation/navigation.recoil';
 import {AppText} from '@/styles/global.style';
-import {useNavigationStateHook} from '@/hooks/navigation/useNavigation.hook';
 
 interface NavHeaderProps {
   navigation: NavigationProps['navigation']['navigation'];
@@ -13,7 +12,6 @@ interface NavHeaderProps {
 
 function NavHeader({navigation, borderBottom}: NavHeaderProps) {
   const {headerTitle} = useRecoilValue(navigationState);
-
   return (
     <S.HeaderLayout borderBottom={borderBottom}>
       <S.MainContent>
