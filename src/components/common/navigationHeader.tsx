@@ -1,12 +1,16 @@
 import * as S from '@/styles/common/navigationHeader.style';
 import {AppText} from '@/styles/global.style';
 import BackIcon from '@/assets/icons/backIcon.svg';
-import {ShopDetailScreenProps, ShopReviewScreenProps} from '@/types/stackprops';
+import {
+  NavigationProps,
+  ShopDetailScreenProps,
+  ShopReviewScreenProps,
+} from '@/types/stackprops';
 import {useShopDetails} from '@/hooks/shop/shopDetail.hook';
 import {useShopReviewQuery} from '@/api/shop/review.api';
 
 interface NavHeaderParams {
-  navigation: ShopDetailScreenProps | ShopReviewScreenProps;
+  navigation: NavigationProps['home' | 'serviceList']['navigation'];
   title: string;
   isActived: boolean;
   url: 'brief' | 'detail';
