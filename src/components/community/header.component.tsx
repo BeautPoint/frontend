@@ -1,15 +1,18 @@
 import * as S from '@/styles/community/header.style';
 import {AppText} from '@/styles/global.style';
-import DownIcon from '@/assets/icons/downIcon.svg';
-import SearchIcon from '@/assets/icons/searchIcon.svg';
 import {useRecoilValue, useSetRecoilState} from 'recoil';
 import communityState from '@/recoil/community/community.recoil';
-import BellIcon from '@/assets/icons/bellIcon.svg';
 import HeaderActionButtons from './actionButtons.component';
+import {NavigationProps} from '@/types/stackprops';
+import SearchIcon from '@/assets/icons/searchIcon.svg';
+import {useSearchHook} from '@/hooks/search/useSearch.hook';
+import {SafeAreaView} from 'react-native';
 
-function CommunityHeader() {
-  const communityInfo = useRecoilValue(communityState);
+function CommunityHeader({navigation}: NavigationProps['community']) {
+  const {tabSelector, selectedTab, showResultsScreen} =
+    useRecoilValue(communityState);
   const setCommunity = useSetRecoilState(communityState);
+  const {setNavLocation} = useSearchHook();
 
   const tabHandle = (tabName: string) => {
     setCommunity(prevState => ({
@@ -17,11 +20,17 @@ function CommunityHeader() {
       selectedTab: tabName,
     }));
   };
+
+  const handleSearchButton = () => {
+    navigation.navigate('CommunitySearch');
+    setNavLocation('community');
+  };
+
   return (
     <S.HeaderLayout>
       <S.TabBox>
-        {communityInfo.tabSelector.map(item => {
-          const isTabSelected = communityInfo.selectedTab === item.name;
+        {tabSelector.map(item => {
+          const isTabSelected = selectedTab === item.name;
           return (
             <S.TabMenu
               border={isTabSelected}
@@ -35,7 +44,14 @@ function CommunityHeader() {
             </S.TabMenu>
           );
         })}
-        <HeaderActionButtons />
+        {/* <HeaderActionButtons /> */}
+        {!showResultsScreen && (
+          <S.ButtonBox>
+            <S.SearchButton onPress={handleSearchButton}>
+              <SearchIcon color="#4d4d4d" />
+            </S.SearchButton>
+          </S.ButtonBox>
+        )}
       </S.TabBox>
       {/* <S.DropdownBox>
         <S.CategoryDrobdown>
