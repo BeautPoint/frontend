@@ -8,9 +8,9 @@ function HeaderActionButtons() {
       <S.SearchButton>
         <SearchIcon color="black" />
       </S.SearchButton>
-      <S.NotificationButton>
+      {/* <S.NotificationButton>
         <BellIcon color="black" width="17px" />
-      </S.NotificationButton>
+      </S.NotificationButton> */}
     </S.ActionButtonLayout>
   );
 }
