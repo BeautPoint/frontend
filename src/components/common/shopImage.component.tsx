@@ -4,21 +4,13 @@ import {useRecoilValue} from 'recoil';
 import HomeState from '@/recoil/home/home.recoil';
 import {useHomeScreenHooks} from '@/hooks/home/home.hook';
 
+
 function ShopImage({shopData}) {
   const {shopList, likeShops} = useRecoilValue(HomeState);
   const {shopLikeHandle} = useHomeScreenHooks();
 
   return (
     <S.ShopImageLayout>
-      <S.LikeButton onPress={() => shopLikeHandle(shopData)}>
-        <HeartIcon
-          color="#ffffff"
-          fill={
-            likeShops.some(list => list.id === shopData.id) ? '#ffffff' : 'none'
-          }
-          strokeWidth="2"
-        />
-      </S.LikeButton>
       <S.GradientImage
         start={{x: 0, y: 0}}
         end={{x: 0, y: 1}}
