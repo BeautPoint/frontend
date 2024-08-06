@@ -16,8 +16,7 @@ function CommunityUserInfo({
   profileImage,
   createdAt,
 }) {
-  const {showReportDropdown, userPosts, isDetailScreen} =
-    useRecoilValue(communityState);
+  const {userPosts, isDetailScreen} = useRecoilValue(communityState);
   const {updateMenuList, openActionSheet} = useActionSheetHook();
   const {reportButtonHandle} = useCommunityPosts();
   const formattedDate = dateCalculator(createdAt);
