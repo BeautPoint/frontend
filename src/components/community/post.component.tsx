@@ -8,39 +8,51 @@ import {useCommunityPosts} from '@/hooks/community/communityPosts.hook';
 import {useRecoilValue} from 'recoil';
 import communityState from '@/recoil/community/community.recoil';
 import {NavigationProps} from '@/types/stackprops';
-import {FlatList, RefreshControl} from 'react-native';
-import {useCallback, useState} from 'react';
+import {
+  Dimensions,
+  FlatList,
+  Platform,
+  RefreshControl,
+  ActivityIndicator,
+} from 'react-native';
+import {useEffect, useState} from 'react';
 import {useFocusEffect} from '@react-navigation/native';
+import {usePostCommentQuery} from '@/api/community/comments.api';
+import {getTabBarHeight} from '@/utils/getTabBarHeight.util';
+import navigationState from '@/recoil/navigation/navigation.recoil';
+import {useSearchHook} from '@/hooks/search/useSearch.hook';
 
 function CommunityPost({navigation}: NavigationProps['community']) {
-  const {postData, getPost} = useCommunityQuery();
+  const {postData} = useCommunityQuery();
+  const [isLoading, setIsLoading] = useState(false);
   const {
     likeButtonHandle,
-    detailPostData,
+    handleRefresh,
+    setPostDetails,
     handleIsDetailScreen,
-    handleRefreshing,
   } = useCommunityPosts();
-  const {likeButton, refreshing} = useRecoilValue(communityState);
+  const {getComments} = usePostCommentQuery();
+  const {tabBarHeight, showResultsScreen} = useRecoilValue(navigationState);
+  const {likeButton, refreshing, resultPosts} = useRecoilValue(communityState);
 
   const selectedPostHandle = post => {
-    detailPostData(post);
-    navigation.navigate('Community');
+    getComments(post.post_id);
+    setPostDetails(post);
+    navigation.navigate('PostDetails');
     handleIsDetailScreen(true);
   };
 
-  const onRefresh = useCallback(() => {
-    handleRefreshing(true);
+  useEffect(() => {
+    setIsLoading(true);
     setTimeout(() => {
-      getPost();
-      handleRefreshing(false);
-    }, 2000);
+      setIsLoading(false);
+    }, 500);
   }, []);
 
-  useFocusEffect(
-    useCallback(() => {
-      getPost();
-    }, []),
-  );
+  const searchScreenPadding = () => {
+    if (Platform.OS === 'ios') return tabBarHeight * 0.8;
+    return tabBarHeight * 0.9;
+  };
 
   const renderItem = ({item: post}) => {
     const buttonisActived = likeButton === post.post_id ? '#619BFF' : '#9a9a9a';
@@ -65,7 +77,7 @@ function CommunityPost({navigation}: NavigationProps['community']) {
             </AppText>
           </S.PostBody>
           <S.TagBox>
-            <S.PostTag>
+            {/* <S.PostTag>
               <AppText color="#BABFC4" size="12px">
                 궁금증
               </AppText>
@@ -74,7 +86,7 @@ function CommunityPost({navigation}: NavigationProps['community']) {
               <AppText color="#BABFC4" size="12px">
                 SMP 두피
               </AppText>
-            </S.PostTag>
+            </S.PostTag> */}
           </S.TagBox>
         </S.MainBox>
         <S.BottomBox>
@@ -89,7 +101,7 @@ function CommunityPost({navigation}: NavigationProps['community']) {
             <AppText color={buttonisActived}>좋아요</AppText>
           </S.ActionButton>
           <S.DividerLine />
-          <S.ActionButton onPress={() => navigation.navigate('Community')}>
+          <S.ActionButton onPress={() => selectedPostHandle(post)}>
             <S.ButtonIcon>
               <CommentIcon width="40px" height="20px" />
             </S.ButtonIcon>
@@ -100,15 +112,46 @@ function CommunityPost({navigation}: NavigationProps['community']) {
     );
   };
 
+  const emptyResults = () => {
+    const {height} = Dimensions.get('screen');
+    return (
+      <S.NoResultsContainer height={height * 0.6}>
+        <S.NoResultsBox>
+          <AppText size="16px" weight="SemiBold">
+            검색 결과가 없습니다.
+          </AppText>
+        </S.NoResultsBox>
+        <S.NoResultsBox>
+          <AppText size="16px" weight="SemiBold">
+            다른 키워드를 입력해 보세요.
+          </AppText>
+        </S.NoResultsBox>
+      </S.NoResultsContainer>
+    );
+  };
+
   return (
-    <S.PostLayout>
-      <FlatList
-        data={postData}
-        renderItem={renderItem}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      />
+    <S.PostLayout
+      usePadding={showResultsScreen}
+      paddingBottom={searchScreenPadding()}>
+      {isLoading ? (
+        <ActivityIndicator style={{marginTop: 50}} color="#000000" />
+      ) : (
+        <FlatList
+          data={showResultsScreen ? resultPosts : postData}
+          renderItem={renderItem}
+          ListEmptyComponent={showResultsScreen ? emptyResults : null}
+          contentContainerStyle={{paddingBottom: tabBarHeight * 0.7}}
+          refreshControl={
+            !showResultsScreen ? (
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={handleRefresh}
+              />
+            ) : undefined
+          }
+        />
+      )}
     </S.PostLayout>
   );
 }
