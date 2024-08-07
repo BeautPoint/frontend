@@ -6,23 +6,31 @@ import HeaderActionButtons from '@/components/community/actionButtons.component'
 import {useCommunityPosts} from '@/hooks/community/communityPosts.hook';
 
 function DetailHeader({navigation}: NavigationProps['community']) {
-  const {handleIsDetailScreen, handleIsEditMode} = useCommunityPosts();
+  const {handleIsDetailScreen, handleIsEditMode, setPostDetails} =
+    useCommunityPosts();
+  const resetDetailPost = {
+    post_id: '',
+    content: '',
+    nickName: '',
+    title: '',
+    viewCount: 0,
+    createdAt: '',
+    profile_image: '',
+  };
   const handlePressedGoback = () => {
     navigation.goBack();
     handleIsDetailScreen(false);
-    return handleIsEditMode(false);
+    handleIsEditMode(false);
+    return setPostDetails(resetDetailPost);
   };
   return (
     <S.DetailHeaderLayout>
-      <S.LeftSection>
-        <S.ActionButton onPress={handlePressedGoback}>
-          <BackIcon />
-        </S.ActionButton>
-      </S.LeftSection>
+      <S.ActionButton onPress={handlePressedGoback}>
+        <BackIcon />
+      </S.ActionButton>
       <S.HeaderTitle>
         <AppText weight="Bold">게시물</AppText>
       </S.HeaderTitle>
-      <HeaderActionButtons />
     </S.DetailHeaderLayout>
   );
 }
