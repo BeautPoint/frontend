@@ -69,6 +69,12 @@ function HomeBanner() {
     }
   };
 
+  const getItemLayout = (data: any, index: number) => ({
+    length: width * 0.9, // 각 항목의 너비
+    offset: width * 0.9 * index, // 각 항목의 위치 계산
+    index,
+  });
+
   return (
     <S.BannerLayout width={width * 0.9}>
       <FlatList
@@ -80,6 +86,7 @@ function HomeBanner() {
         data={[...images, {...images[0], id: 2}]} // Encountered two children with the same key 이슈로 id 제설정
         keyExtractor={item => item.id.toString()}
         onMomentumScrollEnd={onScrollEnd}
+        getItemLayout={getItemLayout}
         renderItem={({item}) => (
           <View>
             <Image
