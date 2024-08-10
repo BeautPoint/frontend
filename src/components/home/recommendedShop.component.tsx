@@ -1,30 +1,32 @@
 import {AppText} from '@/styles/global.style';
 import * as S from '@/styles/home/recommendedShop.style';
-import StartIcon from '@/assets/icons/starIcon.svg';
-import DisTanceIcon from '@/assets/icons/locationIcon.svg';
-import HeartIcon from '@/assets/icons/heartIcon.svg';
 import {useRecoilValue} from 'recoil';
 import HomeState from '@/recoil/home/home.recoil';
-import {useHomeScreenHooks} from '@/hooks/home/home.hook';
 import {NavigationProps} from '@/types/stackprops';
 import ShopDetailScreen from '@/screens/shop/detail.screen';
 import {useAuthHook} from '@/hooks/auth/auth.hook';
+import {useServiceHook} from '@/hooks/service/service.hook';
+import {extractAddress} from '@/utils/validateShop.util';
 
-function RecommendedShop({navigation}: NavigationProps['home']) {
+interface RecommendedShopProps {
+  navigation: NavigationProps['home']['navigation'];
+  serviceShopData: any;
+}
+
+function RecommendedShop({navigation, serviceShopData}: RecommendedShopProps) {
   const imgurl = {
     uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDuKygLj7YGOeEyeVNQyOrykZEvmngRwxbBQ&usqp=CAU',
   };
 
-  const {shopLikeHandle} = useHomeScreenHooks();
   const {shopList, likeShops} = useRecoilValue(HomeState);
-  const {accessToken} = useAuthHook();
+  const {handleShopDetails} = useServiceHook();
   const showShopDetail = false;
 
-  const handleLikeButton = (likeShop: any) => {
-    !accessToken ? navigation.navigate('Login') : shopLikeHandle(likeShop);
+  const handlePressedContent = (data: any) => {
+    navigation.navigate('ServiceDetails');
+    handleShopDetails(data);
   };
 
-  console.log(likeShops);
   return (
     <S.RecommendedShopLayout>
       <S.SectionTitle>
@@ -34,23 +36,12 @@ function RecommendedShop({navigation}: NavigationProps['home']) {
       </S.SectionTitle>
       <S.SlideList
         horizontal
-        data={shopList}
+        data={serviceShopData}
         renderItem={({item}) => (
           <>
             {showShopDetail && <ShopDetailScreen navigation={navigation} />}
-            <S.ShopContainer onPress={() => navigation.navigate('ShopDetails')}>
+            <S.ShopContainer onPress={() => handlePressedContent(item)}>
               <S.ImageBox>
-                <S.LikeButton onPress={() => handleLikeButton(item)}>
-                  <HeartIcon
-                    color="#ffffff"
-                    fill={
-                      likeShops.some(list => list.id === item.id)
-                        ? '#ffffff'
-                        : 'none'
-                    }
-                    strokeWidth="2"
-                  />
-                </S.LikeButton>
                 <S.GradientImage
                   start={{x: 0, y: 0}}
                   end={{x: 0, y: 1}}
@@ -60,29 +51,19 @@ function RecommendedShop({navigation}: NavigationProps['home']) {
                     'rgba(0, 0, 0, 0.1)',
                   ]}
                 />
-                <S.Image source={{uri: item.uri}} />
+                <S.Image source={{uri: imgurl.uri}} />
               </S.ImageBox>
               <S.InfoSection>
-                <S.InfoTop>
-                  <S.ShopName>
-                    <AppText numberOfLines={1}>{item.name}</AppText>
-                  </S.ShopName>
-                </S.InfoTop>
-                <S.InfoBottom>
-                  <S.ShopDistance>
-                    <DisTanceIcon width="10px" color="#4D84E3" />
-                    <AppText size="13px" color="#8d8d8d">
-                      5km
-                    </AppText>
-                  </S.ShopDistance>
-                  <S.ShopRating>
-                    <StartIcon width="10px" />
-                    <AppText>3.3</AppText>
-                    <AppText size="12px" color="#8d8d8d">
-                      (0)
-                    </AppText>
-                  </S.ShopRating>
-                </S.InfoBottom>
+                <S.ServiceInfo>
+                  <AppText weight="SemiBold" numberOfLines={1}>
+                    {item.name}
+                  </AppText>
+                </S.ServiceInfo>
+                <S.ServiceInfo>
+                  <AppText size="11px" color="#8d8d8d" numberOfLines={1}>
+                    {extractAddress(item.address)}
+                  </AppText>
+                </S.ServiceInfo>
               </S.InfoSection>
             </S.ShopContainer>
           </>
