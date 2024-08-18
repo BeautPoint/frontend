@@ -2,7 +2,7 @@ import NavigationHeader from '@/components/common/navigationHeader';
 import {AppText} from '@/styles/global.style';
 import * as S from '@/styles/shop/detail/detailReview.style';
 import {NavigationProps} from '@/types/stackprops';
-import {Fragment} from 'react';
+import {Fragment, useState} from 'react';
 import GrayStarIcon from '@/assets/icons/shopDetail/grayStar.svg';
 import StarIcon from '@/assets/icons/shopDetail/colorStar.svg';
 import ColorStarIcon from '@/assets/icons/shopDetail/colorStar.svg';
@@ -10,15 +10,18 @@ import {useRecoilValue} from 'recoil';
 import shopState from '@/recoil/shop/shop.recoil';
 import {useShopDetails} from '@/hooks/shop/shopDetail.hook';
 
-function DetailReviewScreen({navigation}: NavigationProps['shopDetails']) {
+interface DetailReviewProps {
+  navigation: NavigationProps['home' | 'serviceList']['navigation'];
+}
+
+function ReviewScreen({navigation}: DetailReviewProps) {
   const {reviewRating, detailReviewData} = useRecoilValue(shopState);
   const {reviewRatingHandle, reviewDataHandle} = useShopDetails();
+  const [textValue, setTextValue] = useState('');
 
   const isReviewData = Object.values(detailReviewData).every(
     value => value !== '',
   );
-
-  console.log(detailReviewData);
 
   return (
     <Fragment>
@@ -60,7 +63,7 @@ function DetailReviewScreen({navigation}: NavigationProps['shopDetails']) {
             textAlignVertical="top"
             multiline={true}
             placeholder="본문을 입력해주세요."
-            onChangeText={text => reviewDataHandle(text)}
+            onChangeText={(text: string) => setTextValue(text)}
           />
         </S.Description>
       </S.DetailReviewLayout>
@@ -68,4 +71,4 @@ function DetailReviewScreen({navigation}: NavigationProps['shopDetails']) {
   );
 }
 
-export default DetailReviewScreen;
+export default ReviewScreen;

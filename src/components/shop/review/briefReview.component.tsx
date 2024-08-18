@@ -9,11 +9,14 @@ import {useShopDetails} from '@/hooks/shop/shopDetail.hook';
 import CheckIcon from '@/assets/icons/shopDetail/checkBoxActived.svg';
 import NoneCheckIcon from '@/assets/icons/shopDetail/checkBoxNormal.svg';
 
-function BriefReviewScreen({navigation}: NavigationProps['shopDetails']) {
+interface BriefReviewProps {
+  navigation: NavigationProps['home' | 'serviceList']['navigation'];
+}
+
+function BriefReviewScreen({navigation}: BriefReviewProps) {
   const {BriefReviewList, briefReviewData} = useRecoilValue(shopState);
   const {BriefReviewCheckBoxHandle} = useShopDetails();
   const reviewChecked = BriefReviewList.some(item => item.isSelected === true);
-  console.log(briefReviewData);
   return (
     <Fragment>
       <NavigationHeader
