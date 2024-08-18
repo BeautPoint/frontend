@@ -5,7 +5,11 @@ import ShopReview from '@/components/shop/detail/review.component';
 import DetailShopInfo from '@/components/shop/detail/shopInfo.component';
 import {NavigationProps} from '@/types/stackprops';
 
-function ShopDetailView({navigation}: NavigationProps['home' | 'location']) {
+interface ShopDetailViewProps {
+  navigation: NavigationProps['home' | 'serviceList']['navigation'];
+}
+
+function ShopDetailView({navigation}:ShopDetailViewProps) {
   const [tabValuse, setTabValues] = useState([
     {
       id: 0,
