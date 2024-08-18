@@ -5,10 +5,14 @@ import {useRecoilValue} from 'recoil';
 import CommentIcon from '@/assets/icons/shopDetail/commentIcon.svg';
 import {NavigationProps} from '@/types/stackprops';
 import BriefReviewScreen from '../review/briefReview.component';
-import DetailReviewScreen from '../review/detailReview.component';
+import ReviewScreen from '../review/detailReview.component';
 import {useAuthHook} from '@/hooks/auth/auth.hook';
 
-function ShopReview({navigation}: NavigationProps['shopDetails']) {
+interface ShopReviewProps {
+  navigation: NavigationProps['home' | 'serviceList']['navigation'];
+}
+
+function ShopReview({navigation}: ShopReviewProps) {
   const {BriefReviewList} = useRecoilValue(shopState);
   const showScreen = false;
   const {accessToken} = useAuthHook();
@@ -66,7 +70,7 @@ function ShopReview({navigation}: NavigationProps['shopDetails']) {
         </S.ReviewList>
       </S.DetailReview>
       {showScreen && <BriefReviewScreen navigation={navigation} /> && (
-        <DetailReviewScreen navigation={navigation} />
+        <ReviewScreen navigation={navigation} />
       )}
     </S.ReviewLayout>
   );
