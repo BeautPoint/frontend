@@ -83,19 +83,20 @@ export const useGoogleOauth = () => {
   const onPressGoogleBtn = async () => {
     try {
       await GoogleSignin.hasPlayServices();
+      await GoogleSignin.signIn();
       const {accessToken} = await GoogleSignin.getTokens();
       const loginData = {accessToken, type: 'google'};
       const response = await loginApi(loginData);
       return;
     } catch (err: any) {
-      console.log('google err : ', err.code);
+      console.log('google err : ', err);
       Alert.alert('로그인에 실패 하였습니다.');
     }
   };
 
-  // useEffect(() => {
-  //   GoogleSignin.configure();
-  // }, []);
+  useEffect(() => {
+    GoogleSignin.configure();
+  }, []);
 
   return {onPressGoogleBtn, userInfo};
 };
@@ -147,18 +148,9 @@ export const useNaverOauth = () => {
         consumerSecret,
         serviceUrlScheme,
       });
-      console.log('successResponse : ', successResponse);
       const accessToken = successResponse?.accessToken;
       const loginData = {accessToken, type: 'naver'};
       const response = await loginApi(loginData);
-      console.log('naver : ', response);
-
-      // const {response} = await NaverLogin.getProfile(
-      //   successResponse!.accessToken,
-      // );
-
-      // const {email, id, nickname, profile_image} = response;
-      // setUserInfo({email, id, nickname, profile_image});
     } catch (err) {
       console.log(err);
       Alert.alert('로그인에 실패했습니다.');
@@ -168,10 +160,8 @@ export const useNaverOauth = () => {
   const onPressNaverBtn = async () => {
     try {
       await naverLogin();
-      const {email, nickname, profileImageUrl} = await getProfile();
-      setUserInfo({email, nickname, profileImageUrl});
     } catch (err: any) {
-      console.log(err);
+      console.log('네이버 에러 :', err);
       Alert.alert('로그인에 실패 하였습니다.');
     }
   };
