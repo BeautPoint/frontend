@@ -39,7 +39,6 @@ const useSignupUserInfo = () => {
     const userDate = new Date(date).getDate();
     setIsActive(true);
     const birthDate = new Date(userYear, userMonth, userDate);
-    console.log(signupUserState.birthDate);
     setSignupState(prevState => ({
       ...prevState,
       birthInfo: prevState.birthInfo.map(item => {
@@ -58,13 +57,11 @@ const useSignupUserInfo = () => {
         return {...item, dateValue};
       }),
     }));
-    console.log('생일 :' + birthDate);
     setUserBirth(new Date(userYear, userMonth - 1, userDate + 1));
   };
 
   const infoCollectionHandle = (progressStep: number) => {
     const signupUserInfo = {birthDate: userBirth, gender: userGender};
-    console.log(signupUserInfo);
     if (progressStep < 3) {
       const updateStep = progressStep + 1;
 
@@ -123,16 +120,12 @@ const useSignupUserInfo = () => {
       return {...prevState, signupUserInfo: updatedInfo};
     });
 
-    console.log('유저 : ', signupUserState.signupUserInfo);
   };
 
   const handleSubmit = async () => {
     // step < 3 ? setStep(step + 1) : navigation.reset({routes: [{name: 'Home'}]});
     const stepNumber = signupUserState.progressStep;
-    navigation.reset({routes: [{name: 'Home' as never}]});
-    if (stepNumber !== 3) {
-      return;
-    }
+    // navigation.reset({routes: [{name: 'Home' as never}]});
 
     infoCollectionHandle(stepNumber);
 
@@ -143,13 +136,14 @@ const useSignupUserInfo = () => {
       userConsents: 'Y',
       optionalConsents,
     };
+
     await signupApi(userData);
+
     setNavState(prevState => ({
       ...prevState,
       singupScreen: false,
       resetToHomeScreen: true,
     }));
-
   };
 
   return {
