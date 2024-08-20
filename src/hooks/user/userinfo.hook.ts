@@ -7,8 +7,8 @@ import {
   updateProfilePhoto,
 } from '@/api/user/userInfo.api';
 import userInfoState from '@/recoil/user/user.recoil';
-import {getUserLikedShops} from '@/api/like/userlikeShop.api';
-import {useAuthQuery} from '@/api/auth/auth.api';
+
+import {checkTokenValidity, useAuthQuery} from '@/api/auth/auth.api';
 
 export const useUserInfoHook = () => {
   const [loading, setLoading] = useState(false);
@@ -17,10 +17,11 @@ export const useUserInfoHook = () => {
   const {reissueToken} = useAuthQuery();
   const {handleError} = useProcessError();
 
-  const fetchUserProfile = async () => {
+  const fetchUserProfile = async (): Promise<void | Error> => {
     setLoading(true);
     try {
       const profile = await getUserProfile();
+      console.log('profile :::', profile);
       const {nickName, profile_image, socialType} = profile;
       setUserProfile(prevState => ({
         ...prevState,
@@ -30,28 +31,31 @@ export const useUserInfoHook = () => {
           socialType,
         },
       }));
-
-      console.log('profile : ', nickName, profile_image);
     } catch (err: any) {
-      const fallback = {reissueToken: () => reissueToken()};
-      const error = {...err.response.data, fallback};
-      const token = await handleError(error);
-      console.log('token : :', token);
-      if (token) {
-        return await getUserProfile();
+      // const fallback = {reissueToken: () => reissueToken()};
+      // const error = {...err.response.data, fallback};
+      // const token = await handleError(error);
+      // console.log('token : :', token);
+      // if (token) {
+      //   return await getUserProfile();
+      // }
+      const response = err?.response || {};
+      const message =
+        response?.data?.message || err.message || 'Unknown error occurred';
+
+      console.log('유저 에러 :', message);
+      // const message = err.response.data.message;
+      if (message === 'Invalid token.') {
+        const isTokenReissued = await reissueToken();
+        if (isTokenReissued) {
+          // 토큰 재발급 성공 시 다시 프로필 요청
+          return fetchUserProfile();
+        }
       }
 
-      console.log('유저 에러 :', err.response.data);
+      return err;
     } finally {
       setLoading(false);
-    }
-  };
-
-  const fetchUserLikedShops = async () => {
-    try {
-      const likedShops = await getUserLikedShops;
-    } catch (err: any) {
-      await handleError(err.response.data);
     }
   };
 
@@ -90,10 +94,18 @@ export const useUserInfoHook = () => {
     }
   };
 
+  const handleActiveTab = (id: number) => {
+    setUserProfile(prevState => ({
+      ...prevState,
+      activeTab: id,
+    }));
+  };
+
   return {
     fetchUserProfile,
     changeProfilePhoto,
     changeDefaultprofilePhoto,
     updatedUserProfile,
+    handleActiveTab,
   };
 };
