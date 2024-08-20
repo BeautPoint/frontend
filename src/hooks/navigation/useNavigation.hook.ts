@@ -11,5 +11,18 @@ export const useNavigationStateHook = () => {
     }));
   };
 
-  return {changeHeaderTitle};
+  const getTabBarHeight = (deviceHeight: number) => {
+    let updateTabBarHeight = 0;
+
+    if (deviceHeight > 800) updateTabBarHeight = deviceHeight * 0.09;
+    else if (deviceHeight > 700) updateTabBarHeight = deviceHeight * 0.1;
+    else updateTabBarHeight = deviceHeight * 0.11;
+
+    return setState(prevState => ({
+      ...prevState,
+      tabBarHeight: Math.floor(updateTabBarHeight),
+    }));
+  };
+
+  return {changeHeaderTitle, getTabBarHeight};
 };
