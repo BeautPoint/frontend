@@ -1,6 +1,7 @@
 import actionSheetState from '@/recoil/modal/actionSheet.recoil';
-import {leanchSelectImage} from '@/utils/launchImage.util';
+import {launchSelectImage} from '@/utils/launchImage.util';
 import {useSetRecoilState} from 'recoil';
+import {usePostComments} from '../community/comments.hook';
 import {useCommunityPosts} from '../community/communityPosts.hook';
 import {useUserInfoHook} from '../user/userinfo.hook';
 
@@ -8,6 +9,7 @@ export const useActionSheetHook = () => {
   const setActionSheet = useSetRecoilState(actionSheetState);
   const {changeProfilePhoto, changeDefaultprofilePhoto} = useUserInfoHook();
   const {handleIsEditMode, handleDeletePost} = useCommunityPosts();
+  const {handleDeleteComment} = usePostComments();
   const handleMenuSelection = (id: number | null) => {
     return setActionSheet(prevState => ({
       ...prevState,
@@ -29,7 +31,7 @@ export const useActionSheetHook = () => {
         {
           id: 1,
           title: '앨범에서 선택하기',
-          pressEvent: () => leanchSelectImage(changeProfilePhoto),
+          pressEvent: () => launchSelectImage(changeProfilePhoto),
         },
         {
           id: 2,
@@ -63,6 +65,13 @@ export const useActionSheetHook = () => {
           title: '게시물 삭제하기',
           pressEvent: () => handleDeletePost(),
         },
+        {id: 0, title: '취소', pressEvent: null},
+      ];
+    }
+
+    if (menuType === 'comment') {
+      menuItems = [
+        {id: 9, title: '삭제하기', pressEvent: () => handleDeleteComment()},
         {id: 0, title: '취소', pressEvent: null},
       ];
     }
