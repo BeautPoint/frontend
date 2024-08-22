@@ -15,7 +15,7 @@ const communityState = atom({
     selectedTab: '전체보기',
     likeButton: '' as string | number,
     showReportDropdown: null as number | null,
-    detailPostApi: {
+    detailPostData: {
       post_id: '',
       content: '',
       title: '',
@@ -63,7 +63,33 @@ const communityState = atom({
         profile_image: null,
       },
     ],
+    resultPosts: [
+      {
+        post_id: '',
+        category_id: null,
+        content: '',
+        createdAt: '',
+        title: '',
+        views: null,
+      },
+    ],
+    postCommentsData: [
+      {
+        post_id: '',
+        comment_id: '',
+        createdAt: '',
+        content: '',
+        profile_image: '',
+        nickName: '',
+      },
+    ],
+    userComments: [{post_id: '', comment_id: '', content: '', createdAt: ''}],
     refreshing: false,
+    commentsValue: {post_id: '', content: ''},
+    selectedComment: {comment_id: ''},
+    searchKeyword: '',
+    recentSearches: [''],
+    showResultsScreen: false,
   },
 });
 
