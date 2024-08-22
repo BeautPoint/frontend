@@ -8,11 +8,17 @@ import LocationSearchScreen from '@/screens/search/searchview.screen';
 import HomeSearchScreen from '@/screens/home/homeSerach.screen';
 import CreatePostScreen from '@/screens/community/createPost.screen';
 import BriefReviewScreen from '@/components/shop/review/briefReview.component';
-import DetailReviewScreen from '@/components/shop/review/detailReview.component';
+import ReviewScreen from '@/components/service/reviewForm.component';
 import SettingScreen from '@/components/profile/setting/settingsScreen.component';
 import SettingsDetails from '@/components/profile/setting/settingsDetail.component';
 import EditProfile from '@/components/profile/edit/editProfile.component';
 import CommunityScreen from '@/screens/main/community.screen';
+import SearchScreen from '@/screens/search/search.screen';
+import SearchResultsScreen from '@/screens/community/searchResults.screen';
+import CommunitySearchScreen from '@/screens/community/communitySearch.screen';
+import ServiceDetailScreen from '@/components/service/serviceDetails.component';
+import ServiceSearchResults from '@/screens/home/serviceSearchResults.screen';
+import CategorySearchResults from '@/screens/home/categoryResults.screen';
 
 const Stack = createNativeStackNavigator();
 
@@ -45,18 +51,43 @@ function StackNavigation() {
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="Community"
+        name="PostDetails"
         component={CommunityPostDetail}
         options={{headerShown: false}}
       />
       <Stack.Screen
-        name="CommunityHome"
+        name="Community"
         component={CommunityScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SearchResultPosts"
+        component={ServiceSearchResults}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="CategoryResults"
+        component={CategorySearchResults}
         options={{headerShown: false}}
       />
       <Stack.Screen
         name="HomeSearch"
         component={HomeSearchScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SearchResults"
+        component={SearchResultsScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Search"
+        component={SearchScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="CommunitySearch"
+        component={CommunitySearchScreen}
         options={{headerShown: false}}
       />
       <Stack.Screen
@@ -71,7 +102,7 @@ function StackNavigation() {
       />
       <Stack.Screen
         name="DetailReiview"
-        component={DetailReviewScreen}
+        component={ReviewScreen}
         options={{headerShown: false}}
       />
       <Stack.Screen
@@ -81,6 +112,11 @@ function StackNavigation() {
       />
 
       <Stack.Screen
+        name="ServiceReview"
+        component={ReviewScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
         name="SettingsDetail"
         component={SettingsDetails}
         options={{headerShown: false}}
@@ -89,6 +125,12 @@ function StackNavigation() {
       <Stack.Screen
         name="EditProfile"
         component={EditProfile}
+        options={{headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="ServiceDetails"
+        component={ServiceDetailScreen}
         options={{headerShown: false}}
       />
 
