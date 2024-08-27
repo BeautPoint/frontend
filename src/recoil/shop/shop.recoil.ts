@@ -1,5 +1,3 @@
-import {navigationState} from '@/recoil/navigation/navigation.recoil';
-import {NavigationProps} from './../../types/stackprops';
 import {randomString} from '@/utils/randomString.util';
 import {atom} from 'recoil';
 
@@ -27,6 +25,26 @@ const shopState = atom({
       },
       {id: 'brief-4', description: '가성비가 좋아요', isSelected: false},
     ],
+    selectedService: {
+      place_id: '',
+      name: '',
+      open_now: false,
+      todayOpeningHours: '',
+      openingHours: {
+        weekdays: '',
+        differentWeekdays: '',
+        weekends: '',
+        differentWeekends: '',
+        closed: '',
+      },
+      formattedAddress: '',
+      address: '',
+      phone: '',
+      description: '',
+      // images: [{id: 0, src: ''}],
+      photo: '',
+      category: '',
+    },
     briefReviewData: [] as {reviewId: ''; description: ''}[],
     navigate: () => {},
     reviewRating: [
