@@ -14,10 +14,7 @@ import loginState from '@/recoil/auth/loginInfo.recoil';
 function LoginScreen({navigation}: NavigationProps['signup']) {
   const {loginScreenWelcomeTexts} = useRecoilValue(loginState);
   const handleGuestAccess = () => {
-    navigation.reset({
-      index: 0,
-      routes: [{name: 'Home'}],
-    });
+    navigation.goBack();
   };
 
   const showScreen = false;
