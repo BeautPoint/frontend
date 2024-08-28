@@ -23,7 +23,7 @@ function SignupScreen({navigation}: NavigationProps['signup']) {
   const NextButtonHandle = () => {
     const stepNumber = sigupform.progressStep;
     infoCollectionHandle(stepNumber);
-    handleSubmit();
+    stepNumber === 3 && handleSubmit();
   };
 
   const BackButtonHandle = () => {
