@@ -5,49 +5,44 @@ import BackIcnon from '@/assets/icons/backIcon.svg';
 import {useRecoilValue} from 'recoil';
 import communityState from '@/recoil/community/community.recoil';
 import {useCommunityPosts} from '@/hooks/community/communityPosts.hook';
-import {Platform} from 'react-native';
-import {useState} from 'react';
+import {Platform, SafeAreaView} from 'react-native';
+import {useEffect, useState} from 'react';
 
 function CreatePostScreen({navigation}: NavigationProps['community']) {
-  const {
-    postCategoies,
-    serviceCategoies,
-    selectedPostCategory,
-    createPostData,
-    detailPostApi,
-    isEditMode,
-    editPostData,
-  } = useRecoilValue(communityState);
-  const {
-    postCategoryHandle,
-    postInputHandle,
-    editTextInput,
-    submitPost,
-    handleIsEditMode,
-  } = useCommunityPosts();
+  const {postCategoies, serviceCategoies, detailPostData, isEditMode} =
+    useRecoilValue(communityState);
+  const {postCategoryHandle, submitPost, handleIsEditMode, setPostDetails} =
+    useCommunityPosts();
+
+  const initialInputValues = {
+    title: isEditMode ? detailPostData.title : '',
+    content: isEditMode ? detailPostData.content : '',
+    ...(isEditMode && {post_id: detailPostData.post_id}),
+  };
 
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
-  const postData = isEditMode ? editPostData : createPostData;
-  console.log('postData :', postData);
+  const [textInputValue, setTextInput] = useState(initialInputValues);
+
   const handleSubmit = () => {
     const type = isEditMode ? 'edit' : 'create';
-    submitPost(postData, type);
+    submitPost(textInputValue, type);
+    setPostDetails({...detailPostData, ...textInputValue});
     navigation.goBack();
     handleIsEditMode(false);
   };
 
   const handleTextChange = (text: string, type: 'title' | 'content') => {
-    isEditMode
-      ? editTextInput(detailPostApi.post_id, text, type)
-      : postInputHandle(text, type);
-    const postData = isEditMode ? editPostData : createPostData;
-    const {title, content} = postData;
+    const updatedTextInput = {...textInputValue, [type]: text};
+    setTextInput(updatedTextInput);
+
+    const {title, content} = updatedTextInput;
     const isEnabled = title !== '' && content !== '';
-    setIsSubmitEnabled(isEnabled);
+    setIsSubmitEnabled(isEditMode ? isEditMode : isEnabled);
   };
 
   return (
     <S.CreatePostLayout>
+      <SafeAreaView />
       <S.ScreenHeader>
         <S.BackButton onPress={() => navigation.goBack()}>
           <BackIcnon />
@@ -101,14 +96,14 @@ function CreatePostScreen({navigation}: NavigationProps['community']) {
           platformMargin={Platform.OS}
           placeholder="제목을 입력해주세요"
           onChangeText={(text: string) => handleTextChange(text, 'title')}
-          defaultValue={detailPostApi?.title}
+          defaultValue={detailPostData?.title}
         />
         <S.TextForm
           placeholder="본문을 입력해주세요."
           textAlignVertical="top"
           multiline={true}
           onChangeText={(text: string) => handleTextChange(text, 'content')}
-          defaultValue={detailPostApi?.content}
+          defaultValue={detailPostData?.content}
         />
       </S.PostBodyEditor>
     </S.CreatePostLayout>
