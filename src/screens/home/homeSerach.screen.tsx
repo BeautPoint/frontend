@@ -1,12 +1,21 @@
-import SearchView from '@/components/common/searchView.component';
+import navigationState from '@/recoil/navigation/navigation.recoil';
 import {NavigationProps} from '@/types/stackprops';
-import {Fragment} from 'react';
+import {SafeAreaView, View} from 'react-native';
+import {useRecoilValue} from 'recoil';
+import SearchScreen from '../search/search.screen';
+import ServiceSearchResults from './serviceSearchResults.screen';
 
-function HomeSearchScreen({navigation}: NavigationProps['home']) {
+function HomeSearchScreen({navigation}: NavigationProps['serviceList']) {
+  const {showResultsScreen} = useRecoilValue(navigationState);
+
   return (
-    <Fragment>
-      <SearchView navigation={navigation} />
-    </Fragment>
+    <SafeAreaView style={{backgroundColor: '#ffffff', height: '100%'}}>
+      {showResultsScreen ? (
+        <ServiceSearchResults navigation={navigation} />
+      ) : (
+        <SearchScreen navigation={navigation} />
+      )}
+    </SafeAreaView>
   );
 }
 
