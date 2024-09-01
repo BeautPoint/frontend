@@ -23,10 +23,10 @@ function CommunityScreen({navigation}: NavigationProps['community']) {
 
   return (
     <S.CommunityLayOut>
-      <CommunityHeader />
-      <S.ScrollViewBox>
-        <CommunityPost navigation={navigation} />
-      </S.ScrollViewBox>
+      <CommunityHeader navigation={navigation} />
+      {/* <S.ScrollViewBox> */}
+      <CommunityPost navigation={navigation} />
+      {/* </S.ScrollViewBox> */}
       <S.NewPostButton onPress={() => handleCreatePost()}>
         <WriteIcon color="#ffffff" />
       </S.NewPostButton>
